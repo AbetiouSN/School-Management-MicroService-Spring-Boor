@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: API-GATEWAY
+  server:
+    port: 8080
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: professor-service
+          uri: lb://PROFESSORSERVICE
+          predicates:
+            - Path=/professor/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    preferIpAddress: false
+    instanceId: ${spring.application.name}:${server.port}

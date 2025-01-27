@@ -1,0 +1,72 @@
+Architecture Microservices
+Service Discovery (Eureka Server) :
+
+Rôle : Gérer la découverte des services. Chaque microservice s'enregistre auprès d'Eureka, ce qui permet aux autres services de le localiser.
+
+Technologie : Spring Cloud Netflix Eureka.
+
+Port : 8761 (par défaut).
+
+API Gateway (Spring Cloud Gateway) :
+
+Rôle : Agir comme un point d'entrée unique pour toutes les requêtes client. Il gère le routage, la sécurité, et la limitation de débit.
+
+Technologie : Spring Cloud Gateway.
+
+Port : 8080 (par défaut).
+
+Configuration Service (Spring Cloud Config Server) :
+
+Rôle : Centraliser la configuration de tous les microservices. Les configurations sont stockées dans un dépôt Git.
+
+Technologie : Spring Cloud Config.
+
+Port : 8888 (par défaut).
+
+Authentication Service (Spring Security) :
+
+Rôle : Gérer l'authentification et l'autorisation des utilisateurs. Ce service valide les tokens JWT et gère les rôles utilisateurs.
+
+Technologie : Spring Security, JWT (JSON Web Tokens).
+
+Port : 8081.
+
+Student Service :
+
+Rôle : Gérer les opérations liées aux étudiants (ajout, modification, suppression, recherche).
+
+Technologie : Spring Boot, Spring Data JPA, MySQL.
+
+Port : 8082.
+
+Professor Service :
+
+Rôle : Gérer les opérations liées aux professeurs (ajout, modification, suppression, assignation de modules).
+
+Technologie : Spring Boot, Spring Data JPA, MySQL.
+
+Port : 8083.
+
+Module Service :
+
+Rôle : Gérer les modules (création, gestion, consultation des étudiants inscrits).
+
+Technologie : Spring Boot, Spring Data JPA, MySQL.
+
+Port : 8084.
+
+Enrollment Service :
+
+Rôle : Gérer les inscriptions des étudiants aux modules (inscription, annulation, visualisation).
+
+Technologie : Spring Boot, Spring Data JPA, MySQL.
+
+Port : 8085.
+
+Dashboard Service :
+
+Rôle : Fournir des statistiques et des informations sur les étudiants, les modules, et les inscriptions.
+
+Technologie : Spring Boot, Spring Data JPA, MySQL.
+
+Port : 8086.
