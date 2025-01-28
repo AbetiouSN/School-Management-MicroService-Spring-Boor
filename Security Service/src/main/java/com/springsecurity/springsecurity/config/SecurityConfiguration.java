@@ -69,6 +69,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .requestMatchers("/api/v1/democtr").hasAnyAuthority(ADMIN.name())
+//                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/auth/create-user").hasAnyAuthority(ADMIN.name())
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

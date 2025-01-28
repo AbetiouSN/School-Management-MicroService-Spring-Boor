@@ -2,6 +2,7 @@ package com.springsecurity.springsecurity.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ private  final AuthenticationSercvice authenticationSercvice;
         return ResponseEntity.ok(authenticationSercvice.register(request));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create-user")
     public ResponseEntity<AuthenticationResponse> createUser(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authenticationSercvice.register(request));

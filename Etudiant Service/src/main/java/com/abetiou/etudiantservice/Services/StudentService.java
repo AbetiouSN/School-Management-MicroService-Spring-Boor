@@ -9,7 +9,6 @@ import com.abetiou.etudiantservice.Repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 @Service
 public class StudentService {
 
@@ -22,13 +21,26 @@ public class StudentService {
     }
 
     public Student createStudent(Student student, RegisterRequest registerRequest) {
-        ResponseEntity<AuthenticationResponse> response = authenticationServiceClient.createUser(registerRequest);
+        try {
+            // Appel du service d'authentification pour créer l'utilisateur
+            AuthenticationResponse response = authenticationServiceClient.createUser(registerRequest);
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            student.setUserId(response.getBody().getUserId());
-            return studentRepository.save(student);
-        } else {
-            throw new RuntimeException("User creation failed");
+            // Vérifier si la création de l'utilisateur est réussie
+            if (response != null) {
+                student.setUserId(response.getUserId());
+                System.out.println("AuthenticationResponse userId: " + response.getUserId());
+
+                // Sauvegarder l'étudiant dans la base de données
+                Student savedStudent = studentRepository.save(student);
+                System.out.println("Student successfully saved: " + savedStudent);
+                return savedStudent;
+            } else {
+                System.err.println("Error creating user in AuthService");
+                throw new RuntimeException("User creation failed in AuthService");
+            }
+        } catch (Exception ex) {
+            System.err.println("Error during student creation: " + ex.getMessage());
+            throw new RuntimeException("Student creation failed", ex);
         }
     }
 }
