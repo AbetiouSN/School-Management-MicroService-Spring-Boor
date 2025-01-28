@@ -1,7 +1,8 @@
 package com.abetiou.moduleservice.Entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,9 +10,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Module {
+public class CourseModule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +20,22 @@ public class Module {
 
     private int nombreHeures;
 
-    // Référence à l'ID du professeur responsable
+    private String semestre;
+
     private Long profId;
 
-    // Liste des IDs des étudiants inscrits
     @ElementCollection
     private Set<Long> studentIds = new HashSet<>();
+
+    // Constructeur complet
+    public CourseModule(Long id, String moduleName, int nombreHeures,String semestre, Long profId, Set<Long> studentIds) {
+        this.id = id;
+        this.moduleName = moduleName;
+        this.nombreHeures = nombreHeures;
+        this.semestre = semestre;
+        this.profId = profId;
+        this.studentIds = (studentIds != null) ? studentIds : new HashSet<>();
+    }
 
     public Long getId() {
         return id;
@@ -66,5 +75,13 @@ public class Module {
 
     public void setStudentIds(Set<Long> studentIds) {
         this.studentIds = studentIds;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 }

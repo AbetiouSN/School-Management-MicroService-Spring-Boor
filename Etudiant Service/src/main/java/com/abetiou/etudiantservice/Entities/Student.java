@@ -14,6 +14,11 @@ public class Student {
     private String codeAppogie;
     private String cin;
 
+    // bax nqdo njnbdo wahd list dyal students 3ndom nfs niveau wn affectiwh lwahd module
+    // ATLQAW WAHD METHODE GETALLSTUDENTSBYNIVEAU
+    private String niveau;
+
+
     // Référence à l'ID de l'utilisateur dans le service d'authentification
     private Long userId;
 
@@ -60,5 +65,13 @@ public class Student {
 
     public void setModuleIds(Set<Long> moduleIds) {
         this.moduleIds = moduleIds;
+    }
+
+    public String getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(String niveau) {
+        this.niveau = niveau;
     }
 }

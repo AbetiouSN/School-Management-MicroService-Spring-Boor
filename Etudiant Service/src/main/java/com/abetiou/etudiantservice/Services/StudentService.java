@@ -9,6 +9,7 @@ import com.abetiou.etudiantservice.Repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.AccessDeniedException;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -42,4 +43,9 @@ public class StudentService {
             throw new RuntimeException("User creation failed in authentication service");
         }
     }
+
+    public List<Student> getStudentByNiveau(String niveau) {
+        return studentRepository.findStudentByNiveau(niveau);
+    }
+
 }

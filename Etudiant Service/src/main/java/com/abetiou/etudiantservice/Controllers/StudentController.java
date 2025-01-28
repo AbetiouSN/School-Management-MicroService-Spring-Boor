@@ -38,4 +38,9 @@ public class StudentController {
             return ResponseEntity.status(500).body("Error during student creation: " + ex.getMessage());
         }
     }
+
+    @GetMapping("/allStudentsWithNiveau/{niveau}")
+    public ResponseEntity<?> getStudentByNiveau(@PathVariable String niveau) {
+        return new ResponseEntity<>(studentService.getStudentByNiveau(niveau), HttpStatus.OK);
+    }
 }
