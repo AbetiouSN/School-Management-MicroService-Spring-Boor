@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter Un Professeur</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="d-flex flex-column min-vh-100">
+  <section id="contenu" class="flex-grow-1 d-flex flex-column">
+    <div id="content" class="container-fluid h-custom flex-grow-1">
+      <div class="row d-flex justify-content-center align-items-center h-100"></div>
+    </div>
+    <section id="c" class="bg-dark flex-grow-1">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col">
+            <div class="card card-registration my-4">
+              <div class="row g-0">
+                <div class="col-xl-6 d-none d-xl-block">
+                  <img src="assets/prof.jpg" alt="Photo d'exemple" class="img-fluid"
+                       style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                </div>
+                <div class="col-xl-6">
+                  <div class="card-body p-md-5 text-black">
+                    <h3 class="mb-5 text-uppercase">Ajouter Un Professeur</h3>
+                    <form [formGroup]="signupForm">
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <label class="form-label" for="form3Example1m">Prénom</label>
+                            <input placeholder="Prénom" type="text" id="form3Example1m" class="form-control form-control-lg" formControlName="prenom" />
+                            <div *ngIf="signupForm.get('prenom')?.invalid && signupForm.get('prenom')?.touched" class="text-danger">
+                              Veuillez entrer un prénom.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <label class="form-label" for="form3Example1n">Nom</label>
+                            <input placeholder="Nom" type="text" id="form3Example1n" class="form-control form-control-lg" formControlName="nom" />
+                            <div *ngIf="signupForm.get('nom')?.invalid && signupForm.get('nom')?.touched" class="text-danger">
+                              Veuillez entrer un nom.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <label class="form-label" for="form3Example1m1">Département</label>
+                            <select id="form3Example1m1" class="form-control form-control-lg" formControlName="departement">
+                              <option value="" disabled selected>Départements</option>
+                              <option value="departement1">Dépar 1</option>
+                              <option value="departement2">Dépar 2</option>
+                              <option value="departement3">Dépar 3</option>
+                              <option value="departement4">Dépar 4</option>
+                            </select>
+                            <div *ngIf="signupForm.get('departement')?.invalid && signupForm.get('departement')?.touched" class="text-danger">
+                              Veuillez sélectionner un département.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <label class="form-label" for="form3Example1n1">Email</label>
+                            <input placeholder="Email" type="text" id="form3Example1n1" class="form-control form-control-lg" formControlName="email" />
+                            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
+                              Veuillez entrer un email valide.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="formInvalid" class="alert alert-danger" role="alert">
+                        Veuillez remplir tous les champs correctement.
+                      </div>
+                      <div class="d-flex justify-content-end pt-3">
+                        <button type="reset" class="btn btn-light btn-lg">Réinitialiser</button>
+                        <button type="submit" class="btn btn-warning btn-lg ms-2">Soumettre</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</div>
+</body>

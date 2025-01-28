@@ -1,0 +1,10 @@
+#sticky-footer {
+  padding: 0.8rem 0;
+  padding-bottom: 0.5rem;
+  margin-top: 1em;
+  background-color: #343a40; /* ou bg-dark selon votre besoin */
+  color: white;
+  width: 100%;
+  bottom: 0%;
+
+}

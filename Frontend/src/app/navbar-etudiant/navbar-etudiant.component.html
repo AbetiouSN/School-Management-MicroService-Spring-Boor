@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Personnalisé</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+</head>
+<body>
+  <div class="d-flex flex-column min-vh-100">
+    <div class="header container-fluid">
+      <div class="row w-100">
+        <div class="col-4 text-center">
+          <img src="assets/fmp1.png" alt="Logo">
+        </div>
+        <div class="col-4 text-center">
+          <img src="assets/fmp2.png" alt="Logo">
+        </div>
+        <div class="col-4 text-center">
+          <img src="assets/fmp3.png" alt="Logo">
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
+      <div class="ms-auto">
+        <button (click)="logout()" id="btn" class="btn btn-primary my-2 my-sm-0 me-2" type="button">Déconnexion</button>
+        <button routerLink="/etudiant/resetPassword" id="btn" class="btn btn-secondary my-2 my-sm-0" type="button">Changer le mot de passe</button>
+      </div>
+    </div>
+
+    <div class="container-fluid flex-grow-1">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Personnalisé</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+  <div class="d-flex flex-column min-vh-100">
+    <!-- <section id="contenu" class="flex-grow-1 d-flex flex-column">
+      <div id="content" class="container-fluid h-custom flex-grow-1"> -->
+        <div class="header">
+          <div class="left">
+            <img src="assets/fmp1.png" alt="Logo">
+          </div>
+          <div class="center">
+            <img src="assets/fmp2.png" alt="Logo">
+          </div>
+          <div class="right">
+            <img src="assets/fmp3.png" alt="Logo">
+          </div>
+        </div>
+        <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li ngbDropdown class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
+                  Absence
+                </a>
+                <div ngbDropdownMenu>
+                  <button class="dropdown-item" [routerLink]="['/prof/absence', 1]" ngbDropdownItem>Niveau 1</button>
+                  <button class="dropdown-item" [routerLink]="['/prof/absence', 2]" ngbDropdownItem>Niveau 2</button>
+                </div>
+              </li>
+              <li ngbDropdown class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
+                  TPs
+                </a>
+                <div ngbDropdownMenu>
+                  <button routerLink="/prof/tps/1" ngbDropdownItem>NIVEAU 1</button>
+                  <button routerLink="/prof/tps/2" ngbDropdownItem>NIVEAU 2</button>
+                </div>
+              </li>
+              <li ngbDropdown class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
+                  Les Notes
+                </a>
+                <div ngbDropdownMenu>
+                  <button routerLink="/prof/notes/1" ngbDropdownItem>NIVEAU 1</button>
+                  <button routerLink="/prof/notes/2" ngbDropdownItem>NIVEAU 2</button>
+                </div>
+              </li>
+            </ul>
+            <button (click)="logout()" id="btn" class="btn  my-2 my-sm-0" type="button">Déconnexion</button>
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    <!-- </section> -->
+    <app-footer></app-footer>
+  <!-- </div> -->
+</body>
+</html>

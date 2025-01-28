@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Personnalisée</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Header Design */
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #004d91, #ffa600);
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* Navbar Design */
+    .navbar {
+      background-color: #ffa600 !important;
+      padding: 10px;
+    }
+
+    .navbar .navbar-nav .nav-link {
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+    }
+
+    .navbar .nav-link:hover {
+      background-color: #004d91;
+      color: white;
+    }
+
+    /* Dropdown Styling */
+    .navbar .dropdown-menu {
+      background-color: #ffa600;
+      border: none;
+    }
+
+    .navbar .dropdown-item {
+      color: white;
+    }
+
+    .navbar .dropdown-item:hover {
+      background-color: #004d91;
+      color: white;
+    }
+
+    /* Logout Button */
+    #btn {
+      color: white;
+      background-color: #004d91;
+      border: none;
+      padding: 7px 13px;
+      margin-left: auto;
+    }
+
+    #btn:hover {
+      background-color: #003366;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 767px) {
+      #btn {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex flex-column min-vh-100">
+    <!-- Header Section -->
+    <div class="header">
+      <h1>Bienvenue sur E-Learning</h1>
+    </div>
+
+    <!-- Navbar Section -->
+    <div class="navbar navbar-expand-md navbar-dark bg-dark" role="navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" id="acceuil" href="/admin/signup">Liste Des Enseignants</a>
+          </li>
+          <li ngbDropdown class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
+              Liste des Étudiants
+            </a>
+            <div ngbDropdownMenu>
+              <button routerLink="/admin/niveau/1" ngbDropdownItem>NIVEAU 1</button>
+              <button routerLink="/admin/niveau/2" ngbDropdownItem>NIVEAU 2</button>
+            </div>
+          </li>
+        </ul>
+        <button id="btn" (click)="logout()" class="btn my-2 my-sm-0">Déconnexion</button>
+      </div>
+    </div>
+
+    <!-- Main Content Placeholder -->
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>
