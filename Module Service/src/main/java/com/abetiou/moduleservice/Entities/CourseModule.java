@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class CourseModule {
 
     @Id
@@ -27,6 +26,8 @@ public class CourseModule {
     @ElementCollection
     private Set<Long> studentIds = new HashSet<>();
 
+    public CourseModule() {
+    }
     // Constructeur complet
     public CourseModule(Long id, String moduleName, int nombreHeures,String semestre, Long profId, Set<Long> studentIds) {
         this.id = id;

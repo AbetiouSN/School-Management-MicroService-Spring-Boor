@@ -25,4 +25,15 @@ public class ModuleController {
         CourseModule createdModule = moduleService.createModule(moduleName, nombreHeures,semestre, profId);
         return ResponseEntity.ok(createdModule);
     }
+
+    // Endpoint pour affecter une liste d'étudiants à un module
+    @PutMapping("/{moduleId}/assign-students")
+    public ResponseEntity<CourseModule> assignStudentsToModule(
+            @PathVariable Long moduleId,
+            @RequestParam String niveau) {
+
+        CourseModule updatedModule = moduleService.assignStudentsToModule(moduleId, niveau);
+        return ResponseEntity.ok(updatedModule);
+    }
+
 }
