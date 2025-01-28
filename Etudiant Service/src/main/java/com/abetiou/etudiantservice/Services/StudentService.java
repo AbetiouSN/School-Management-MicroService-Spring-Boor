@@ -20,6 +20,30 @@ public class StudentService {
         this.authenticationServiceClient = authenticationServiceClient;
     }
 
+//    public Student createStudent(Student student, RegisterRequest registerRequest) {
+//        try {
+//            // Appel du service d'authentification pour créer l'utilisateur
+//            AuthenticationResponse response = authenticationServiceClient.createUser(registerRequest);
+//
+//            // Vérifier si la création de l'utilisateur est réussie
+//            if (response != null) {
+//                student.setUserId(response.getUserId());
+//                System.out.println("AuthenticationResponse userId: " + response.getUserId());
+//
+//                // Sauvegarder l'étudiant dans la base de données
+//                Student savedStudent = studentRepository.save(student);
+//                System.out.println("Student successfully saved: " + savedStudent);
+//                return savedStudent;
+//            } else {
+//                System.err.println("Error creating user in AuthService");
+//                throw new RuntimeException("User creation failed in AuthService");
+//            }
+//        } catch (Exception ex) {
+//            System.err.println("Error during student creation: " + ex.getMessage());
+//            throw new RuntimeException("Student creation failed", ex);
+//        }
+//    }
+
     public Student createStudent(Student student, RegisterRequest registerRequest) {
         try {
             // Appel du service d'authentification pour créer l'utilisateur
@@ -43,4 +67,6 @@ public class StudentService {
             throw new RuntimeException("Student creation failed", ex);
         }
     }
+
+
 }

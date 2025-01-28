@@ -3,9 +3,12 @@ package com.abetiou.professorservice.Services;
 import com.abetiou.professorservice.Configuration.AuthenticationServiceClient;
 import com.abetiou.professorservice.DTO.AuthenticationResponse;
 import com.abetiou.professorservice.DTO.RegisterRequest;
+import com.abetiou.professorservice.DTO.User;
 import com.abetiou.professorservice.Entities.Prof;
 import com.abetiou.professorservice.Repository.ProfRepository;
 import org.springframework.stereotype.Service;
+
+import java.nio.file.AccessDeniedException;
 
 @Service
 public class ProfService {
@@ -13,36 +16,30 @@ public class ProfService {
     private final ProfRepository profRepository;
     private final AuthenticationServiceClient authenticationServiceClient;
 
-    ProfService(ProfRepository profRepository, AuthenticationServiceClient authenticationServiceClient) {
+    public ProfService(ProfRepository profRepository, AuthenticationServiceClient authenticationServiceClient) {
         this.profRepository = profRepository;
         this.authenticationServiceClient = authenticationServiceClient;
     }
-    public Prof createProd(Prof prof, RegisterRequest registerRequest) {
-        if (prof == null) {
-            throw new IllegalArgumentException("Prof cannot be null");
+
+    public Prof createProf(Prof prof, RegisterRequest registerRequest, String token) throws AccessDeniedException {
+        // Vérifier si l'utilisateur authentifié est admin
+        User authenticatedUser = authenticationServiceClient.getUserByToken(token);
+
+        if (!authenticatedUser.getRole().equalsIgnoreCase("ADMIN")) {
+            throw new AccessDeniedException("Only admins can create professors");
         }
 
-        try {
-            // Appel du service d'authentification pour créer l'utilisateur
-            AuthenticationResponse response = authenticationServiceClient.createUser(registerRequest);
+        // Appeler le service d'authentification pour créer l'utilisateur
+        AuthenticationResponse response = authenticationServiceClient.createUser(registerRequest);
 
-            // Vérifier si la création de l'utilisateur est réussie
-            if (response != null) {
-                prof.setUserId(response.getUserId());
-                System.out.println("AuthenticationResponse userId: " + response.getUserId());
+        if (response != null) {
+            // Associer l'utilisateur créé au professeur
+            prof.setUserId(response.getUserId());
 
-                // Sauvegarder l'étudiant dans la base de données
-                Prof savedProf = profRepository.save(prof);
-                System.out.println("Professor successfully saved: " + savedProf);
-                return savedProf;
-            } else {
-                System.err.println("Error creating user in AuthService");
-                throw new RuntimeException("User creation failed in AuthService");
-            }
-        } catch (Exception ex) {
-            System.err.println("Error during professor creation: " + ex.getMessage());
-            throw new RuntimeException("Professor creation failed", ex);
+            // Sauvegarder le professeur dans la base de données
+            return profRepository.save(prof);
+        } else {
+            throw new RuntimeException("User creation failed in authentication service");
         }
     }
-
 }
