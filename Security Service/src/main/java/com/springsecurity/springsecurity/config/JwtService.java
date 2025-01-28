@@ -1,5 +1,6 @@
 package com.springsecurity.springsecurity.config;
 
+import com.springsecurity.springsecurity.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -33,12 +34,16 @@ public class JwtService {
     //hadi d rihab
 public String generateToken(UserDetails userDetails){
     return Jwts.builder()
-            .setClaims(Map.of("role",userDetails.getAuthorities()))
+            .setClaims(Map.of(
+                    "role", userDetails.getAuthorities(),
+                    "userId", ((User)userDetails).getId())) // Inclure userId dans les claims
             .setSubject(userDetails.getUsername())
             .setIssuedAt(new Date(System.currentTimeMillis()))
-            .setExpiration(new Date(System.currentTimeMillis()+ 1000 * 60 *60*10))
-            .signWith(getSignInKey(),SignatureAlgorithm.HS256).compact();
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))  // Expiration dans 10 heures
+            .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+            .compact();
 }
+
 
     public String generateToken(Map<String,Object> extraClaims, UserDetails userDetails){
         return Jwts.builder()

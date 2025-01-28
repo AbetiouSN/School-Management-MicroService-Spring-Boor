@@ -34,6 +34,20 @@ public class AuthenticationSercvice {
               .build();
     }
 
+    public User findUserById(Integer userId) {
+        return repository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public User findUserByToken(String token) {
+        // Extraire le username (ou userId) du token
+        String username = jwtService.extrtactUsername(token);
+
+        // Rechercher l'utilisateur dans la base de données par email ou userId
+        return repository.findByEmail(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
