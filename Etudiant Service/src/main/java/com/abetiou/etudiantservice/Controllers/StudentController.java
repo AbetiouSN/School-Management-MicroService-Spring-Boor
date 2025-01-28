@@ -43,4 +43,13 @@ public class StudentController {
     public ResponseEntity<?> getStudentByNiveau(@PathVariable String niveau) {
         return new ResponseEntity<>(studentService.getStudentByNiveau(niveau), HttpStatus.OK);
     }
+
+    // Endpoint to assign a module to students based on their niveau
+    @PostMapping("/assignModuleToStudent")
+    public void assignModuleToStudents(@RequestParam Long moduleId, @RequestParam String niveau) {
+        System.out.println("ModuleId: " + moduleId + ", Niveau: " + niveau);
+
+        studentService.assignModuleToStudentsByNiveau(moduleId, niveau);
+    }
+
 }

@@ -48,4 +48,17 @@ public class StudentService {
         return studentRepository.findStudentByNiveau(niveau);
     }
 
+
+    // Method to assign a module to a list of students based on their niveau
+    public void assignModuleToStudentsByNiveau(Long moduleId, String niveau) {
+        // Retrieve all students with the given niveau
+        List<Student> students = studentRepository.findStudentByNiveau(niveau);
+
+        // Add the module to each student's module list
+        for (Student student : students) {
+            student.getModuleIds().add(moduleId);  // Add the module ID
+            studentRepository.save(student);       // Save the student after modification
+        }
+    }
+
 }
