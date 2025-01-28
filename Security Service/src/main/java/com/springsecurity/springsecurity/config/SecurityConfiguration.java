@@ -14,7 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static com.springsecurity.springsecurity.user.Role.ADMIN;
-import static com.springsecurity.springsecurity.user.Role.USER;
 import static java.lang.invoke.VarHandle.AccessMode.GET;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -69,7 +68,6 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
                         .permitAll()
-                        .requestMatchers("api/v1/democontroller").hasAnyAuthority(USER.name())
                         .requestMatchers("/api/v1/democtr").hasAnyAuthority(ADMIN.name())
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

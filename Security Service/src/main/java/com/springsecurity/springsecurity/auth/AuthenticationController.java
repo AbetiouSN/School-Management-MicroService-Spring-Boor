@@ -21,6 +21,11 @@ private  final AuthenticationSercvice authenticationSercvice;
         return ResponseEntity.ok(authenticationSercvice.register(request));
     }
 
+    @PostMapping("/create-user")
+    public ResponseEntity<AuthenticationResponse> createUser(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authenticationSercvice.register(request));
+    }
+
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
