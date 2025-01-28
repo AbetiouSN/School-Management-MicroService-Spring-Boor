@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.file.AccessDeniedException;
 
 @RestController
-@RequestMapping("/prof")
+@RequestMapping("/professor")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProfController {
 
     private final ProfService profService;

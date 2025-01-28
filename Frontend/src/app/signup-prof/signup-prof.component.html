@@ -27,61 +27,45 @@
                 <div class="col-xl-6">
                   <div class="card-body p-md-5 text-black">
                     <h3 class="mb-5 text-uppercase">Ajouter Un Professeur</h3>
-                    <form [formGroup]="signupForm">
+                    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <label class="form-label" for="form3Example1m">Prénom</label>
-                            <input placeholder="Prénom" type="text" id="form3Example1m" class="form-control form-control-lg" formControlName="prenom" />
-                            <div *ngIf="signupForm.get('prenom')?.invalid && signupForm.get('prenom')?.touched" class="text-danger">
-                              Veuillez entrer un prénom.
+                            <label class="form-label" for="cin">CIN</label>
+                            <input type="text" id="cin" class="form-control form-control-lg" formControlName="cin" />
+                            <div *ngIf="signupForm.get('cin')?.invalid && signupForm.get('cin')?.touched" class="text-danger">
+                              Veuillez entrer un CIN valide.
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <label class="form-label" for="form3Example1n">Nom</label>
-                            <input placeholder="Nom" type="text" id="form3Example1n" class="form-control form-control-lg" formControlName="nom" />
-                            <div *ngIf="signupForm.get('nom')?.invalid && signupForm.get('nom')?.touched" class="text-danger">
-                              Veuillez entrer un nom.
-                            </div>
+                            <label class="form-label" for="prenom">Prénom</label>
+                            <input type="text" id="prenom" class="form-control form-control-lg" formControlName="prenom" />
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <label class="form-label" for="form3Example1m1">Département</label>
-                            <select id="form3Example1m1" class="form-control form-control-lg" formControlName="departement">
-                              <option value="" disabled selected>Départements</option>
-                              <option value="departement1">Dépar 1</option>
-                              <option value="departement2">Dépar 2</option>
-                              <option value="departement3">Dépar 3</option>
-                              <option value="departement4">Dépar 4</option>
-                            </select>
-                            <div *ngIf="signupForm.get('departement')?.invalid && signupForm.get('departement')?.touched" class="text-danger">
-                              Veuillez sélectionner un département.
-                            </div>
+                            <label class="form-label" for="nom">Nom</label>
+                            <input type="text" id="nom" class="form-control form-control-lg" formControlName="nom" />
                           </div>
                         </div>
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
-                            <label class="form-label" for="form3Example1n1">Email</label>
-                            <input placeholder="Email" type="text" id="form3Example1n1" class="form-control form-control-lg" formControlName="email" />
-                            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
-                              Veuillez entrer un email valide.
-                            </div>
+                            <label class="form-label" for="email">Email</label>
+                            <input type="text" id="email" class="form-control form-control-lg" formControlName="email" />
                           </div>
                         </div>
-                      </div>
-                      <div *ngIf="formInvalid" class="alert alert-danger" role="alert">
-                        Veuillez remplir tous les champs correctement.
                       </div>
                       <div class="d-flex justify-content-end pt-3">
                         <button type="reset" class="btn btn-light btn-lg">Réinitialiser</button>
                         <button type="submit" class="btn btn-warning btn-lg ms-2">Soumettre</button>
                       </div>
                     </form>
+
+
                   </div>
                 </div>
               </div>
