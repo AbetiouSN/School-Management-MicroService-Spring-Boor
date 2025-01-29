@@ -31,7 +31,7 @@ private  final AuthenticationSercvice authenticationSercvice;
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create-user")
     public ResponseEntity<AuthenticationResponse> createUser(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationSercvice.register(request));
+        return ResponseEntity.ok(authenticationSercvice.registerWithoutPasswd(request));
     }
 
     @PostMapping("/authenticate")

@@ -5,6 +5,8 @@ import com.abetiou.moduleservice.Services.ModuleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/modules")
 public class ModuleController {
@@ -41,5 +43,11 @@ public class ModuleController {
     public ResponseEntity<CourseModule> getModuleById(@PathVariable Long moduleId) {
         CourseModule module = moduleService.findModuleById(moduleId);
         return ResponseEntity.ok(module);
+    }
+
+    @GetMapping("/allmodules")
+    public ResponseEntity<List<CourseModule>> getAllModules() {
+        List<CourseModule> courseModules = moduleService.courseModuleList();
+        return ResponseEntity.ok(courseModules);
     }
 }

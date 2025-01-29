@@ -101,4 +101,8 @@ public class ModuleService {
     }
 
 
+    public List<CourseModule> courseModuleList(){
+        return moduleRepository.findAll();
+    }
+
 }

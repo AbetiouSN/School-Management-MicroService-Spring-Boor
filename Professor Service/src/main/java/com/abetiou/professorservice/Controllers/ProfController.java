@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.AccessDeniedException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/professor")
@@ -51,4 +52,10 @@ public class ProfController {
     }
 
 
+
+    // Endpoint pour récupérer la liste de tous les professeurs
+    @GetMapping("/list")
+    public List<Prof> getAllProfs() {
+        return profService.getAllProfs();
+    }
 }

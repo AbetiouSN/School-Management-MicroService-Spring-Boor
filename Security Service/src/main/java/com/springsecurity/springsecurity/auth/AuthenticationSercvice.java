@@ -5,6 +5,7 @@ import com.springsecurity.springsecurity.user.Role;
 import com.springsecurity.springsecurity.user.User;
 import com.springsecurity.springsecurity.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +33,29 @@ public class AuthenticationSercvice {
               .token(jwtToken)
               .userId(user.getId())
               .build();
+    }
+
+    // Méthode pour générer un mot de passe aléatoire
+    private String generateRandomPassword(int length) {
+        return RandomStringUtils.randomAlphanumeric(length);  // Utilisation de Apache Commons Lang pour générer une chaîne alphanumérique
+    }
+
+    public AuthenticationResponse registerWithoutPasswd(RegisterRequest request) {
+        String generatedPassword = generateRandomPassword(12); // Vous pouvez ajuster la longueur si nécessaire
+
+        var user = User.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(generatedPassword))
+                .role(request.getRole())
+                .build();
+        repository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .userId(user.getId())
+                .build();
     }
 
     public User findUserById(Integer userId) {
