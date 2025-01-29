@@ -9,6 +9,7 @@ import com.abetiou.professorservice.Repository.ProfRepository;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.AccessDeniedException;
+import java.util.Optional;
 
 @Service
 public class ProfService {
@@ -42,4 +43,46 @@ public class ProfService {
             throw new RuntimeException("User creation failed in authentication service");
         }
     }
+
+    public Prof updateStudentById(Long id, Prof student, User user) {
+        // Récupération de l'ancien prof
+        Optional<Prof> existingProfOptional = profRepository.findById(id);
+
+        if (existingProfOptional.isEmpty()) {
+            throw new RuntimeException("Professor with ID " + id + " not found");
+        }
+
+        Prof oldProf = existingProfOptional.get();
+
+        // Mise à jour de l'information du professeur
+        oldProf.setCin(student.getCin());
+
+        // Mise à jour de l'utilisateur via le service d'authentification
+        User updatedUser = null;
+        try {
+            updatedUser = authenticationServiceClient.updateUser(
+                    oldProf.getUserId(),
+                    user.getFirstname(),
+                    user.getLastname(),
+                    user.getEmail()
+            );
+        } catch (Exception e) {
+            // Gestion des exceptions
+            System.out.println("Error updating user in Authentication Service: " + e.getMessage());
+            throw new RuntimeException("Failed to update user in Authentication Service");
+        }
+
+        if (updatedUser == null) {
+            throw new RuntimeException("Failed to update user: No response from Authentication Service");
+        }
+
+        // Sauvegarde du professeur après mise à jour
+        profRepository.save(oldProf);
+
+        return oldProf;
+    }
+
+
+
+
 }

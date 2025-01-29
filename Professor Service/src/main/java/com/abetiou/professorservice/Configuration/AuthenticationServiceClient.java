@@ -23,6 +23,16 @@ public interface AuthenticationServiceClient {
 
     @GetMapping("/user/token")
     User getUserByToken(@RequestHeader("Authorization") String token);
+
+    @PutMapping("/{id}")
+    User updateUser(
+            @PathVariable("id") Long id,
+            @RequestParam("firstname") String firstname,
+            @RequestParam("lastname") String lastname,
+            @RequestParam("email") String email
+    );
+
+
 }
 
 

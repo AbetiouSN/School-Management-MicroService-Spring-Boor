@@ -1,6 +1,7 @@
 package com.abetiou.professorservice.Controllers;
 
 import com.abetiou.professorservice.DTO.ProfCreationRequest;
+import com.abetiou.professorservice.DTO.ProfUpdateRequest;
 import com.abetiou.professorservice.Entities.Prof;
 import com.abetiou.professorservice.Services.ProfService;
 import org.springframework.http.ResponseEntity;
@@ -37,4 +38,17 @@ public class ProfController {
             return ResponseEntity.status(500).body("Error during professor creation: " + ex.getMessage());
         }
     }
+
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Prof> updateStudent(
+            @PathVariable Long id,
+            @RequestBody ProfUpdateRequest request
+    ) {
+        Prof updatedProf = profService.updateStudentById(id, request.getProf(), request.getRegisterRequest());
+        return ResponseEntity.ok(updatedProf);
+    }
+
+
 }
