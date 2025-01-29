@@ -94,6 +94,11 @@ public class ModuleService {
     }
 
 
+    //trouver module par id
+    public CourseModule findModuleById(Long moduleId) {
+        return moduleRepository.findById(moduleId)
+                .orElseThrow(() -> new RuntimeException("Module not found with ID: " + moduleId));
+    }
 
 
 }

@@ -27,7 +27,8 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     @Query("SELECT s FROM Student s JOIN s.moduleIds m WHERE m = :moduleId")
     List<Student> findByModuleId(@Param("moduleId") Long moduleId);
 
-
+    @Query("SELECT m, COUNT(s) FROM Student s JOIN s.moduleIds m GROUP BY m")
+    List<Object[]> getStudentCountByModule();
 
 }
 

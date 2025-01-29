@@ -1,13 +1,11 @@
 package com.abetiou.etudiantservice.Services;
 
 import com.abetiou.etudiantservice.Configurations.AuthenticationServiceClient;
-import com.abetiou.etudiantservice.DTO.AuthenticationResponse;
-import com.abetiou.etudiantservice.DTO.RegisterRequest;
-import com.abetiou.etudiantservice.DTO.UpdateStudentRequest;
-import com.abetiou.etudiantservice.DTO.User;
+import com.abetiou.etudiantservice.DTO.*;
 import com.abetiou.etudiantservice.Entities.Student;
 import com.abetiou.etudiantservice.Repository.StudentRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.file.AccessDeniedException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class StudentService {
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     private final StudentRepository studentRepository;
     private final AuthenticationServiceClient authenticationServiceClient;
@@ -207,6 +206,48 @@ public class StudentService {
             return added;
         }
         return false; // Étudiant non trouvé
+    }
+
+
+    // nbr d'etudiants selon le moduke
+//    public Map<Long, Long> getStudentCountByModule() {
+//        List<Object[]> results = studentRepository.getStudentCountByModule();
+//        Map<Long, Long> studentCountByModule = new HashMap<>();
+//
+//        for (Object[] result : results) {
+//            Long moduleId = (Long) result[0];
+//            Long count = (Long) result[1];
+//            studentCountByModule.put(moduleId, count);
+//        }
+//
+//        return studentCountByModule;
+//    }
+
+
+    public Map<String, Long> getStudentCountByModule() {
+        List<Object[]> results = studentRepository.getStudentCountByModule();
+        Map<String, Long> studentCountByModule = new HashMap<>();
+
+        for (Object[] result : results) {
+            Long moduleId = (Long) result[0];
+            Long count = (Long) result[1];
+
+            // Utilisation de Feign pour récupérer le nom du module
+            String moduleName = getModuleNameById(moduleId);
+
+            studentCountByModule.put(moduleName, count);
+        }
+
+        return studentCountByModule;
+    }
+
+    private String getModuleNameById(Long moduleId) {
+        try {
+            CourseModule module = authenticationServiceClient.getModuleById(moduleId);
+            return (module != null) ? module.getModuleName() : "Unknown Module";
+        } catch (Exception e) {
+            return "Unknown Module";
+        }
     }
 
 }

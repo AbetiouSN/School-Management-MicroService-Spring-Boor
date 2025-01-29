@@ -1,6 +1,7 @@
 package com.abetiou.etudiantservice.Configurations;
 
 import com.abetiou.etudiantservice.DTO.AuthenticationResponse;
+import com.abetiou.etudiantservice.DTO.CourseModule;
 import com.abetiou.etudiantservice.DTO.RegisterRequest;
 import com.abetiou.etudiantservice.DTO.User;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -38,6 +39,10 @@ public interface AuthenticationServiceClient {
 
     @GetMapping("/findUser/{userId}")
     User findUserById(@PathVariable("userId") Long userId);
+
+    @GetMapping("/{moduleId}")
+    CourseModule getModuleById(@PathVariable("moduleId") Long moduleId);
+
 }
 
 

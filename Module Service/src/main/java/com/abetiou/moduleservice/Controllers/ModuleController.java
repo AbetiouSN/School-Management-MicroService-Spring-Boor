@@ -36,4 +36,10 @@ public class ModuleController {
         return ResponseEntity.ok(updatedModule);
     }
 
+    // Endpoint pour récupérer un module par son ID
+    @GetMapping("/{moduleId}")
+    public ResponseEntity<CourseModule> getModuleById(@PathVariable Long moduleId) {
+        CourseModule module = moduleService.findModuleById(moduleId);
+        return ResponseEntity.ok(module);
+    }
 }
