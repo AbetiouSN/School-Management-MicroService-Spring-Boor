@@ -1,0 +1,105 @@
+.container {
+    max-width: 1300px;
+    margin: auto;
+    font-size: large;
+  }
+  
+  h2 {
+    color: #004d91;
+    margin-bottom: 30px;
+  }
+  
+  .table {
+    margin-top: 30px;
+    background-color: #fff;
+  }
+  
+/* Centrer les boutons dans la colonne */
+td:last-child {
+    text-align: center;
+}
+
+/* Centrer les boutons horizontalement */
+td:last-child div {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Espacement entre les boutons */
+}
+
+/* Styles des boutons */
+.btn {
+    border-radius: 5px;
+    font-size: large;
+}
+
+.btn-warning {
+    background-color: #ffa600;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border: none;
+}
+
+  
+  .btn-warning:hover {
+    background-color: #e69500;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c9302c;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  /* Conteneur de la barre de recherche */
+.search-container {
+  position: relative;
+  max-width: 500px;
+  margin: auto;
+  
+}
+
+/* Style de la barre de recherche */
+.search-container input {
+  width: 100%;
+  padding: 12px 40px 12px 20px; /* Ajout d'espace pour l'icône */
+  font-size: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ 
+}
+
+/* Effet de focus pour une interaction visuelle */
+.search-container input:focus {
+  border-color: #004d91; /* Change la couleur de la bordure lors du focus */
+  box-shadow: 0 0 5px rgba(0, 77, 145, 0.6); /* Ombre légère au focus */
+  outline: none; /* Enlever le contour par défaut du focus */
+}
+
+/* Icône de recherche */
+.search-container input::placeholder {
+  color: #aaa;
+}
+
+/* Barre de recherche avec une icône à gauche */
+.search-container input::before {
+  content: '\f002'; /* Code Unicode pour l'icône de loupe */
+  font-family: 'FontAwesome'; /* Utilisation de FontAwesome pour l'icône */
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #004d91;
+}
+
+/* Assurez-vous que FontAwesome est inclus dans votre projet (via CDN ou fichier local) */

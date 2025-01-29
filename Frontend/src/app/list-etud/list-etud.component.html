@@ -1,0 +1,50 @@
+<div class="container mt-4">
+    <h2 class="text-center">Liste des Etudiants</h2>
+  
+    <button routerLink="/admin/ajoutEtud" class="btn btn-primary mb-3" style="font-size: larger;" (click)="ajouterEtud()">Ajouter Etudiant</button>
+    
+    <!-- Barre de recherche -->
+   <div class="search-container mt-5">
+    <input 
+      type="text" 
+      class="form-control mb-3" 
+      placeholder="Rechercher par code Apogée" 
+      [(ngModel)]="searchTerm" 
+      (input)="filteredEtudiants()"
+    >
+  </div>
+  
+    
+  
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>CNE</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Date de Naissance</th>
+          <th>Date Inscription</th>
+          <th style="text-align: center;">Email</th>
+          <th style="text-align: center;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etud of filteredEtudiants()">
+          <td>{{ etud.codeAppogie }}</td>
+          <td>{{ etud.user.firstname }}</td>
+          <td>{{ etud.user.lastname }}</td>
+          <td>{{ etud.dateNaissance }}</td>
+          <td>{{ etud.dateInscription }}</td>
+          <td>{{ etud.user.email }}</td>
+          <td>
+            <div>
+              <button class="btn btn-warning btn-sm" (click)="modifierEtud(etud.codeAppogie)">Modifier</button>
+              <button class="btn btn-danger btn-sm" (click)="supprimerEtud(etud.id)">Supprimer</button>
+              
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

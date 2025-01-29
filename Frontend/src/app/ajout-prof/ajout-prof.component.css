@@ -16,17 +16,19 @@
   }
   
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
   
   .form-group label {
     font-weight: bold;
     color: #333;
+    font-size: larger;
   }
   
   .input-group {
     display: flex;
     align-items: center;
+    font-size: larger;
   }
   
   .input-group-text {
@@ -34,6 +36,7 @@
     color: #fff;
     border: none;
     border-radius: 5px 0 0 5px;
+   
   }
   
   .form-control {
@@ -41,6 +44,8 @@
     padding: 12px;
     font-size: 1rem;
     border: 1px solid #ccc;
+    font-size: larger;
+  
   }
   
   .form-control:focus {
@@ -63,7 +68,8 @@
   }
   
   input[type="text"], input[type="email"] {
-    font-size: 1rem;
+    font-size: 1.3rem;
+    
   }
   
   input::placeholder {

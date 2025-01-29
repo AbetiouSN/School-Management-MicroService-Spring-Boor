@@ -25,7 +25,7 @@ export class ProfListComponent implements OnInit {
   }
 
   ajouterProf() {
-   
+    this.router.navigate(['/admin/ajoutProf']);
   }
 
   modifierProf(id: number) {

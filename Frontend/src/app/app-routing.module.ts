@@ -13,6 +13,8 @@ import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 import { NavbarEtudiantComponent } from './navbar-etudiant/navbar-etudiant.component';
 import { ProfListComponent } from './list-prof/list-prof.component';
 import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
+import { ListEtudComponent } from './list-etud/list-etud.component';
+import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
     { path: 'signup', component: SignupProfComponent },
     { path: 'listProf', component: ProfListComponent },
     { path: 'ajoutProf', component: AjoutProfComponent },
+    { path: 'listEtud', component: ListEtudComponent },
+    { path: 'ajoutEtud', component: AjoutEtudComponent },
   ]},
 
   {path:'etudiant',component:NavbarEtudiantComponent,canActivate: [EtudiantGuard],children:[

@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h2 class="text-center">Ajouter un Professeur</h2>
+    <h2 class="text-center"> {{ prof.id ? 'Modifier Professeur' : 'Ajouter Professeur' }}</h2>
     
     <form (ngSubmit)="ajouterProf()" class="form-professeur">
       <div class="form-group">

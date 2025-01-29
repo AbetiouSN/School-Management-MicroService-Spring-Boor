@@ -1,0 +1,67 @@
+<div class="container">
+    <h2> {{ etud.id ? 'Modifier Étudiant' : 'Ajouter Étudiant' }}</h2>
+
+    <form (ngSubmit)="ajouterEtud()" class="form-professeur">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <div class="input-group">
+                    <span><i class="fas fa-user"></i></span>
+                    <input type="text" id="nom" class="form-control" [(ngModel)]="etud.user.firstname" name="nom" required placeholder="Entrez le nom">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <div class="input-group">
+                    <span><i class="fas fa-user"></i></span>
+                    <input type="text" id="prenom" class="form-control" [(ngModel)]="etud.user.lastname" name="prenom" required placeholder="Entrez le prénom">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cin">CIN</label>
+                <div class="input-group">
+                    <span><i class="fas fa-id-card"></i></span>
+                    <input type="text" id="cin" class="form-control" [(ngModel)]="etud.cin" name="cin" required placeholder="Entrez le CIN">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cne">CNE</label>
+                <div class="input-group">
+                    <span><i class="fas fa-id-card"></i></span>
+                    <input type="text" id="cne" class="form-control" [(ngModel)]="etud.codeAppogie" name="cne" required placeholder="Entrez le CNE">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateNaissance">Date de Naissance</label>
+                <div class="input-group">
+                    <span><i class="fas fa-calendar"></i></span>
+                    <input type="date" id="dateNaissance" class="form-control" [(ngModel)]="etud.dateNaissance" name="dateNaissance" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateInscription">Date Inscription</label>
+                <div class="input-group">
+                    <span><i class="fas fa-calendar"></i></span>
+                    <input type="date" id="dateInscription" class="form-control" [(ngModel)]="etud.dateInscription" name="dateInscription" required>
+                </div>
+            </div>
+
+            <div  class="form-group">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <span><i class="fas fa-envelope"></i></span>
+                    <input type="email" id="email" class="form-control" [(ngModel)]="etud.user.email" name="email" required placeholder="Entrez l'email">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">
+            {{ etud.id ? 'Modifier Étudiant' : 'Ajouter Étudiant' }}
+        </button>
+    </form>
+</div>

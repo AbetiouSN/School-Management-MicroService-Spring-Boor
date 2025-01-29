@@ -23,6 +23,8 @@ import { SignupProfComponent } from './signup-prof/signup-prof.component';
 import { CommonModule } from '@angular/common';
 import { ProfListComponent } from './list-prof/list-prof.component';
 import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
+import { ListEtudComponent } from './list-etud/list-etud.component';
+import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
     ResetPasswordComponent,
     ProfListComponent,
     AjoutProfComponent,
+    ListEtudComponent,
+    AjoutEtudComponent,
   ],
   imports: [
     BrowserModule,
