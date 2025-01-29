@@ -16,7 +16,6 @@ public class FeignConfiguration {
     public Decoder feignDecoder() {
         return new OptionalDecoder(new SpringDecoder(() -> new HttpMessageConverters()));
     }
-
     @Bean
     public Encoder feignEncoder() {
         return new SpringEncoder(() -> new HttpMessageConverters());

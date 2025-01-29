@@ -10,5 +10,15 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student,Long> {
 
     List<Student> findStudentByNiveau(String niveau);
+    Student findStudentById(Long id);
 
+    @Override
+    void delete(Student entity);
+
+//    Student findStudentByUser_Id(Long id);
+
+    Student findStudentByCin(String cin);
+
+    Student findStudnetByCodeAppogie(String codeAppogie);
 }
+

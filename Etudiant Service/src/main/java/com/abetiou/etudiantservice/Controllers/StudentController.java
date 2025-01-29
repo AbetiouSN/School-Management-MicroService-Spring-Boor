@@ -1,6 +1,8 @@
 package com.abetiou.etudiantservice.Controllers;
 
 import com.abetiou.etudiantservice.DTO.StudentCreationRequest;
+import com.abetiou.etudiantservice.DTO.UpdateStudentRequest;
+import com.abetiou.etudiantservice.DTO.User;
 import com.abetiou.etudiantservice.Entities.Student;
 import com.abetiou.etudiantservice.Services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.AccessDeniedException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/students")
@@ -51,5 +54,58 @@ public class StudentController {
 
         studentService.assignModuleToStudentsByNiveau(moduleId, niveau);
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> updateStudent(
+            @PathVariable Long id,
+            @RequestBody UpdateStudentRequest request
+    ) {
+        Student updatedStudent = studentService.updateStudentById(id, request.getStudent(), request.getUser());
+
+        if (updatedStudent != null) {
+            return ResponseEntity.ok(updatedStudent);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUStudentById(@PathVariable Long id){
+        studentService.deleteStudentById(id);
+        return ResponseEntity.ok("Student deleted successfully");
+    }
+
+
+    //etudiant avec les detailles
+    @GetMapping("/students/cin/{cin}")
+    public ResponseEntity<UpdateStudentRequest> findStudentByCin(@PathVariable String cin) {
+        UpdateStudentRequest student = studentService.findStudentByCin(cin);
+        if (student != null) {
+            return ResponseEntity.ok(student);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/students/codeAppogie/{codeAppogie}")
+    public ResponseEntity<UpdateStudentRequest> findStudentByCodeAppogie(@PathVariable String codeAppogie) {
+        UpdateStudentRequest student = studentService.findStudentByCodeAppogie(codeAppogie);
+        if (student != null) {
+            return ResponseEntity.ok(student);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
+    @GetMapping("/students")
+    public ResponseEntity<List<UpdateStudentRequest>> findAllStudent() {
+        List<UpdateStudentRequest> students = studentService.findAllStudent();
+        if (students != null && !students.isEmpty()) {
+            return ResponseEntity.ok(students);
+        }
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
 
 }

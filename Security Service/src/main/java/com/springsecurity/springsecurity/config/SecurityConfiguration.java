@@ -72,6 +72,8 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/auth/create-user").hasAnyAuthority(ADMIN.name())
                         .requestMatchers("/auth/authenticate").permitAll()
+                        .requestMatchers("/auth/{id}").permitAll()
+                        .requestMatchers("/auth/findUser/{userId}").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

@@ -4,6 +4,7 @@ import com.springsecurity.springsecurity.user.User;
 import com.springsecurity.springsecurity.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -54,6 +55,34 @@ private  final AuthenticationSercvice authenticationSercvice;
             return authenticationSercvice.findUserByToken(token);
         } else {
             throw new AccessDeniedException("Token is missing or invalid");
+        }
+    }
+
+    @PutMapping("/{id}")
+    public User updateUser(
+            @PathVariable Integer id,
+            @RequestParam(required = false) String firstname,
+            @RequestParam(required = false) String lastname,
+            @RequestParam(required = false) String email
+    ) {
+        return authenticationSercvice.updateUser(id, firstname, lastname, email);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable Integer id){
+        authenticationSercvice.deleteUserById(id);
+        return ResponseEntity.ok("User deleted successfully");
+    }
+
+
+    // find user
+    @GetMapping("/findUser/{userId}")
+    public ResponseEntity<User> findUserById(@PathVariable Integer userId) {
+        try {
+            User user = authenticationSercvice.findUserById(userId);
+            return ResponseEntity.ok(user);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 

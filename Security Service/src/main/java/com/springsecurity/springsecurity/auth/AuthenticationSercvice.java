@@ -62,4 +62,42 @@ public class AuthenticationSercvice {
                 .token(jwtToken)
                 .build();
     }
+
+
+
+
+    //update user
+    public User updateUser(Integer id, String firstname, String lastname, String email) {
+        // Récupération de l'utilisateur existant
+        User user = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Mise à jour des champs
+        if (firstname != null && !firstname.isEmpty()) {
+            user.setFirstname(firstname);
+        }
+        if (lastname != null && !lastname.isEmpty()) {
+            user.setLastname(lastname);
+        }
+        if (email != null && !email.isEmpty()) {
+            user.setEmail(email);
+        }
+
+        // Sauvegarde de l'utilisateur mis à jour
+        return repository.save(user);
+    }
+
+
+    //delete User by id
+    public void deleteUserById(Integer id){
+        User user = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (user != null){
+            repository.delete(user);
+            System.out.println("User deleted successfully");
+        }
+    }
+
+
+
 }

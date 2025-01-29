@@ -14,6 +14,9 @@ public class Student {
     private String codeAppogie;
     private String cin;
 
+    private String dateNaissance;
+    private String dateInscription;
+
     // bax nqdo njnbdo wahd list dyal students 3ndom nfs niveau wn affectiwh lwahd module
     // ATLQAW WAHD METHODE GETALLSTUDENTSBYNIVEAU
     private String niveau;
@@ -26,6 +29,21 @@ public class Student {
     @ElementCollection
     private Set<Long> moduleIds = new HashSet<>();
 
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public String getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(String dateInscription) {
+        this.dateInscription = dateInscription;
+    }
 
     public Long getId() {
         return id;
