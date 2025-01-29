@@ -58,4 +58,11 @@ public class ProfController {
     public List<Prof> getAllProfs() {
         return profService.getAllProfs();
     }
+
+
+    //prof by id
+    @GetMapping("/{id}")
+    public ProfUpdateRequest getProfById(@PathVariable Long id) {
+        return profService.findProfById(id);
+    }
 }

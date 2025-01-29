@@ -5,6 +5,14 @@ public class ProfUpdateRequest {
     private Prof prof;
     private User registerRequest;
 
+    public ProfUpdateRequest() {
+    }
+
+    public ProfUpdateRequest(Prof prof, User registerRequest) {
+        this.prof = prof;
+        this.registerRequest = registerRequest;
+    }
+
     // Getters and Setters
     public Prof getProf() {
         return prof;

@@ -24,6 +24,10 @@ public interface AuthenticationServiceClient {
     @GetMapping("/user/token")
     User getUserByToken(@RequestHeader("Authorization") String token);
 
+    @GetMapping("/findUser/{userId}")
+    User findUserById(@PathVariable("userId") Long userId);
+
+
     @PutMapping("/{id}")
     User updateUser(
             @PathVariable("id") Long id,

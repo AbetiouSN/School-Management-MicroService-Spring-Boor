@@ -50,4 +50,10 @@ public class ModuleController {
         List<CourseModule> courseModules = moduleService.courseModuleList();
         return ResponseEntity.ok(courseModules);
     }
+
+    @GetMapping("/prof/{profId}")
+    public List<CourseModule> getModulesByProfId(@PathVariable Long profId) {
+        return moduleService.getModulesByProfId(profId);
+    }
+
 }

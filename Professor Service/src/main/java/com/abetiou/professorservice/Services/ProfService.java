@@ -2,6 +2,7 @@ package com.abetiou.professorservice.Services;
 
 import com.abetiou.professorservice.Configuration.AuthenticationServiceClient;
 import com.abetiou.professorservice.DTO.AuthenticationResponse;
+import com.abetiou.professorservice.DTO.ProfUpdateRequest;
 import com.abetiou.professorservice.DTO.RegisterRequest;
 import com.abetiou.professorservice.DTO.User;
 import com.abetiou.professorservice.Entities.Prof;
@@ -88,5 +89,17 @@ public class ProfService {
     public List<Prof> getAllProfs() {
         return profRepository.findAll();
     }
+
+
+    public ProfUpdateRequest findProfById(Long id) {
+        // Récupération de l'ancien prof
+        Optional<Prof> prof = profRepository.findProfById(id);
+        if (prof.isPresent()) {
+            User user = authenticationServiceClient.findUserById(prof.get().getUserId());
+            return new ProfUpdateRequest(prof.get(), user);
+        }
+        return null;
+    }
+
 
 }

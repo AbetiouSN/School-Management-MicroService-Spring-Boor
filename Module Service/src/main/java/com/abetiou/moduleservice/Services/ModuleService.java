@@ -105,4 +105,9 @@ public class ModuleService {
         return moduleRepository.findAll();
     }
 
+
+    public List<CourseModule> getModulesByProfId(Long profId) {
+        return moduleRepository.findByProfId(profId);
+    }
+
 }
