@@ -7,6 +7,7 @@ import com.abetiou.etudiantservice.DTO.UpdateStudentRequest;
 import com.abetiou.etudiantservice.DTO.User;
 import com.abetiou.etudiantservice.Entities.Student;
 import com.abetiou.etudiantservice.Repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -29,26 +31,50 @@ public class StudentService {
     }
 
     public Student createStudent(Student student, RegisterRequest registerRequest, String token) throws AccessDeniedException {
-        // Vérifier si l'utilisateur authentifié est admin
-        User authenticatedUser = authenticationServiceClient.getUserByToken(token);
+        try {
+            // Log avant de vérifier l'authentification
+            System.out.println("Checking user authentication with token: " + token);
 
-        if (!authenticatedUser.getRole().equalsIgnoreCase("ADMIN")) {
-            throw new AccessDeniedException("Only admins can create students");
-        }
+            User authenticatedUser = authenticationServiceClient.getUserByToken(token);
 
-        // Appeler le service d'authentification pour créer l'utilisateur
-        AuthenticationResponse response = authenticationServiceClient.createUser(registerRequest);
+            // Log après avoir récupéré l'utilisateur authentifié
+            System.out.println("Authenticated user: " + authenticatedUser);
 
-        if (response != null) {
-            // Associer l'utilisateur créé au professeur
-            student.setUserId(response.getUserId());
+            if (!authenticatedUser.getRole().equalsIgnoreCase("ADMIN")) {
+                throw new AccessDeniedException("Only admins can create students");
+            }
 
-            // Sauvegarder le professeur dans la base de données
-            return studentRepository.save(student);
-        } else {
-            throw new RuntimeException("User creation failed in authentication service");
+            // Log avant de créer l'utilisateur
+            System.out.println("Creating user in authentication service");
+
+            AuthenticationResponse response = authenticationServiceClient.createUser(registerRequest);
+
+            if (response != null && response.getUserId() != null) {
+                // Log après avoir créé l'utilisateur
+                System.out.println("User created successfully, User ID: " + response.getUserId());
+
+                // Associer l'utilisateur créé au étudiant
+                student.setUserId(response.getUserId());
+
+                // Sauvegarder l'étudiant
+                return studentRepository.save(student);
+            } else {
+                // Log si la réponse du service d'authentification est null
+                System.out.println("Authentication service returned null response");
+                throw new RuntimeException("User creation failed in authentication service. Response was null or invalid.");
+            }
+        } catch (AccessDeniedException ex) {
+            // Log d'erreur si l'accès est refusé
+            System.out.println("Access Denied: " + ex.getMessage());
+            throw new AccessDeniedException("Access Denied: " + ex.getMessage());
+        } catch (Exception ex) {
+            // Log d'erreur générale
+            System.out.println("Error during student creation: " + ex.getMessage());
+            throw new RuntimeException("Error during student creation: " + ex.getMessage(), ex);
         }
     }
+
+
 
     public List<Student> getStudentByNiveau(String niveau) {
         return studentRepository.findStudentByNiveau(niveau);
@@ -145,6 +171,42 @@ public class StudentService {
         }
 
         return updateStudentRequests;
+    }
+
+
+    public List<Student> getStudentsByModuleId(Long moduleId) {
+        return studentRepository.findByModuleId(moduleId);
+    }
+
+
+    // separer etud 3la module
+    @Transactional
+    public boolean removeModuleFromStudent(Long studentId, Long moduleId) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            boolean removed = student.getModuleIds().remove(moduleId);
+            if (removed) {
+                studentRepository.save(student); // Mettre à jour l'étudiant sans ce module
+            }
+            return removed;
+        }
+        return false; // Étudiant non trouvé
+    }
+
+
+    @Transactional
+    public boolean addModuleToStudent(Long studentId, Long moduleId) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            boolean added = student.getModuleIds().add(moduleId); // Ajoute le module si absent
+            if (added) {
+                studentRepository.save(student); // Sauvegarde l'étudiant mis à jour
+            }
+            return added;
+        }
+        return false; // Étudiant non trouvé
     }
 
 }

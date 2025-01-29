@@ -70,7 +70,7 @@ public class SecurityConfiguration {
                         .permitAll()
                         .requestMatchers("/api/v1/democontroller").permitAll()
 //                        .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/auth/create-user").hasAnyAuthority(ADMIN.name())
+                        .requestMatchers("/auth/create-user").permitAll()
                         .requestMatchers("/auth/authenticate").permitAll()
                         .requestMatchers("/auth/{id}").permitAll()
                         .requestMatchers("/auth/findUser/{userId}").permitAll()

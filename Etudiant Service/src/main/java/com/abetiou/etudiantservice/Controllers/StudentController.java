@@ -107,5 +107,30 @@ public class StudentController {
         return ResponseEntity.noContent().build(); // 204 No Content
     }
 
+    //trouver liste des etudiants par module
+    @GetMapping("/by-module/{moduleId}")
+    public List<Student> getStudentsByModule(@PathVariable Long moduleId) {
+        return studentService.getStudentsByModuleId(moduleId);
+    }
 
+
+    @DeleteMapping("/{studentId}/modules/{moduleId}")
+    public ResponseEntity<String> removeModuleFromStudent(@PathVariable Long studentId, @PathVariable Long moduleId) {
+        boolean removed = studentService.removeModuleFromStudent(studentId, moduleId);
+        if (removed) {
+            return ResponseEntity.ok("Module retiré avec succès de l'étudiant.");
+        } else {
+            return ResponseEntity.badRequest().body("Échec du retrait du module.");
+        }
+    }
+
+    @PostMapping("/{studentId}/modules/{moduleId}")
+    public ResponseEntity<String> addModuleToStudent(@PathVariable Long studentId, @PathVariable Long moduleId) {
+        boolean added = studentService.addModuleToStudent(studentId, moduleId);
+        if (added) {
+            return ResponseEntity.ok("Module affecté avec succès à l'étudiant.");
+        } else {
+            return ResponseEntity.badRequest().body("Échec de l'affectation du module.");
+        }
+    }
 }
