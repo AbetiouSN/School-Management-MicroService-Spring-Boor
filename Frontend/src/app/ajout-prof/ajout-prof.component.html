@@ -1,0 +1,45 @@
+<div class="container mt-5">
+    <h2 class="text-center">Ajouter un Professeur</h2>
+    
+    <form (ngSubmit)="ajouterProf()" class="form-professeur">
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input type="text" id="nom" class="form-control" [(ngModel)]="prof.user.firstname" name="nom" required placeholder="Entrez le nom">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input type="text" id="prenom" class="form-control" [(ngModel)]="prof.user.lastname" name="prenom" required placeholder="Entrez le prénom">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="cin">CIN</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+          <input type="text" id="cin" class="form-control" [(ngModel)]="prof.cin" name="cin" required placeholder="Entrez le CIN">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          <input type="email" id="email" class="form-control" [(ngModel)]="prof.user.email" name="email" required placeholder="Entrez l'email">
+        </div>
+      </div>
+  
+      <button 
+  type="submit" 
+  class="btn btn-primary mt-3">
+  {{ prof.id ? 'Modifier Professeur' : 'Ajouter Professeur' }}
+</button>
+
+    </form>
+  </div>
+  

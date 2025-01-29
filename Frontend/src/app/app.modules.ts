@@ -20,6 +20,9 @@ import { NavbarEtudiantComponent } from './navbar-etudiant/navbar-etudiant.compo
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SignupProfComponent } from './signup-prof/signup-prof.component';
+import { CommonModule } from '@angular/common';
+import { ProfListComponent } from './list-prof/list-prof.component';
+import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { SignupProfComponent } from './signup-prof/signup-prof.component';
     NavbarAdminComponent,
     SignupProfComponent,
     NavbarEtudiantComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ProfListComponent,
+    AjoutProfComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,7 @@ import { SignupProfComponent } from './signup-prof/signup-prof.component';
     BrowserModule,
     NgbCollapseModule,
     ReactiveFormsModule,
+    CommonModule,
 
 
   ],

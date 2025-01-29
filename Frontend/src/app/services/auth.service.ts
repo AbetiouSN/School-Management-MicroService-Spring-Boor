@@ -97,7 +97,10 @@ export class AuthService {
         const user: user = {
           role: tokenPayload.role[0].authority,
           email: tokenPayload.sub,
-          password: ''
+          password: '',
+          firstname:'',
+          lastname:'',
+          id:0
         };
         return user;
       }

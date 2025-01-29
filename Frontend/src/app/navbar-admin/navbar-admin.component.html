@@ -91,16 +91,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" id="acceuil" href="/admin/signup">Liste Des Enseignants</a>
+            <a class="nav-link" id="acceuil" style="font-size: x-large;" href="/admin/listProf">Gérer les enseignants</a>
           </li>
-          <li ngbDropdown class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" ngbDropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
-              Liste des Étudiants
-            </a>
-            <div ngbDropdownMenu>
-              <button routerLink="/admin/niveau/1" ngbDropdownItem>NIVEAU 1</button>
-              <button routerLink="/admin/niveau/2" ngbDropdownItem>NIVEAU 2</button>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" id="acceuil" style="font-size: x-large;" href="/admin/listEtud">Gérer les étudiants</a>
           </li>
         </ul>
         <button id="btn" (click)="logout()" class="btn my-2 my-sm-0">Déconnexion</button>

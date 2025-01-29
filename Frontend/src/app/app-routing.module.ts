@@ -11,20 +11,21 @@ import { NiveauGuard } from './gards/niveauGuard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 import { NavbarEtudiantComponent } from './navbar-etudiant/navbar-etudiant.component';
+import { ProfListComponent } from './list-prof/list-prof.component';
+import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
 
   { path: 'admin', component: NavbarAdminComponent,canActivate:[AdminGuard], children:[
     { path: 'signup', component: SignupProfComponent },
+    { path: 'listProf', component: ProfListComponent },
+    { path: 'ajoutProf', component: AjoutProfComponent },
   ]},
-
 
   {path:'etudiant',component:NavbarEtudiantComponent,canActivate: [EtudiantGuard],children:[
     { path: 'resetPassword', component: ResetPasswordComponent },
   ]},
-
-
 
   { path: 'prof', component: NavbarComponent,canActivate: [ProfGuard], children: [
 

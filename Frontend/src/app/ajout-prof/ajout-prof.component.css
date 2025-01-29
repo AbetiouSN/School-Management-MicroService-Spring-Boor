@@ -1,0 +1,72 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  h2 {
+    color: #004d91;
+  }
+  
+  .form-professeur {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: larger;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group-text {
+    background-color: #004d91;
+    color: #fff;
+    border: none;
+    border-radius: 5px 0 0 5px;
+  }
+  
+  .form-control {
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+  }
+  
+  .form-control:focus {
+    border-color: #004d91;
+    box-shadow: 0 0 5px rgba(0, 77, 145, 0.5);
+  }
+  
+  .btn {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #004d91;
+    border: none;
+    color: #fff;
+    width: 100%;
+  }
+  
+  .btn:hover {
+    background-color: #003366;
+  }
+  
+  input[type="text"], input[type="email"] {
+    font-size: 1rem;
+  }
+  
+  input::placeholder {
+    color: #888;
+  }
+  
