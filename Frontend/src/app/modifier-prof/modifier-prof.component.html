@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>Modifier le Professeur</h2>
+
+  <form *ngIf="profForm" [formGroup]="profForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="cin">CIN</label>
+      <input formControlName="cin" id="cin" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input formControlName="prenom" id="prenom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input formControlName="nom" id="nom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="email" id="email" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+  </form>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+</div>

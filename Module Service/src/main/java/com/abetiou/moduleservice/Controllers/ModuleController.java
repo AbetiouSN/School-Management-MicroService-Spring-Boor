@@ -1,5 +1,6 @@
 package com.abetiou.moduleservice.Controllers;
 
+import com.abetiou.moduleservice.DTO.ModuleWithStudentCount;
 import com.abetiou.moduleservice.Entities.CourseModule;
 import com.abetiou.moduleservice.Services.ModuleService;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +55,11 @@ public class ModuleController {
     @GetMapping("/prof/{profId}")
     public List<CourseModule> getModulesByProfId(@PathVariable Long profId) {
         return moduleService.getModulesByProfId(profId);
+    }
+
+    @GetMapping("/with-student-count")
+    public List<ModuleWithStudentCount> getModulesWithStudentCount() {
+        return moduleService.getModulesWithStudentCount();
     }
 
 }

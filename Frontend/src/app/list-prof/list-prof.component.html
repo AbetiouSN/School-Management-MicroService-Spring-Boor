@@ -2,19 +2,17 @@
   <h2 class="text-center">Liste des Professeurs</h2>
 
   <button routerLink="/admin/ajoutProf" class="btn btn-primary mb-3" style="font-size: larger;" (click)="ajouterProf()">Ajouter Professeur</button>
-  
-  <!-- Barre de recherche -->
- <div class="search-container mt-5">
-  <input 
-    type="text" 
-    class="form-control mb-3" 
-    placeholder="Rechercher par email" 
-    [(ngModel)]="searchTerm" 
-    (input)="filteredProfesseurs()"
-  >
-</div>
 
-  
+  <!-- Barre de recherche -->
+  <div class="search-container mt-5">
+    <input
+      type="text"
+      class="form-control mb-3"
+      placeholder="Rechercher par email"
+      [(ngModel)]="searchTerm"
+      (input)="filteredProfesseurs()"
+    >
+  </div>
 
   <table class="table table-bordered">
     <thead class="thead-dark">
@@ -22,8 +20,8 @@
         <th>CIN</th>
         <th>Nom</th>
         <th>Prénom</th>
-        <th style="text-align: center;">Email</th>
-        <th style="text-align: center;">Actions</th>
+        <th>Email</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -33,12 +31,14 @@
         <td>{{ prof.user.lastname }}</td>
         <td>{{ prof.user.email }}</td>
         <td>
-          <div>
-            <button class="btn btn-warning btn-sm" (click)="modifierProf(prof.id)">Modifier</button>
-            <button class="btn btn-danger btn-sm" (click)="supprimerProf(prof.id)">Supprimer</button>
-            
+          <div style="display: flex; gap: 10px;">
+            <button *ngIf="prof?.id" class="btn btn-info" [routerLink]="['/admin/detailsProf', prof.id]">Voir Détails</button>
+            <button *ngIf="prof?.id" class="btn btn-warning" [routerLink]="['/admin/modifierProf', prof.id]">Modifier</button>
+            <button *ngIf="prof?.id" class="btn btn-danger" (click)="supprimerProf(prof.id)">Supprimer</button>
           </div>
         </td>
+
+
       </tr>
     </tbody>
   </table>

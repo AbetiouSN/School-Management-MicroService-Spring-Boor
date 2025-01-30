@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProfService } from '../services/prof.service';
-import { Prof } from '../models/prof.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,8 +7,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './signup-prof.component.html',
   styleUrls: ['./signup-prof.component.css']
 })
-export class SignupProfComponent {
+export class SignupProfComponent implements OnInit {
   signupForm!: FormGroup;
+  isSubmitting = false;  // Pour gérer l'état de soumission
+  errorMessage: string | null = null;  // Pour gérer les messages d'erreur
 
   constructor(private fb: FormBuilder, private profService: ProfService) {}
 
@@ -24,30 +25,40 @@ export class SignupProfComponent {
 
   onSubmit(): void {
     if (this.signupForm.invalid) {
+      this.errorMessage = 'Veuillez remplir tous les champs correctement.';
       return;
     }
+
+    this.isSubmitting = true;  // Démarrer la soumission
 
     const formValues = this.signupForm.value;
 
     const requestPayload = {
-      prof: {
-        cin: formValues.cin,
-      },
-      registerRequest: {
+      cin: formValues.cin,
+      user: {
         firstname: formValues.prenom,
         lastname: formValues.nom,
         email: formValues.email,
-        password: 'password123', // Default for the example
-        role: 'PROF',
       },
+      userId: undefined,  // Remplacer null par undefined
     };
 
     this.profService.createProf(requestPayload).subscribe({
-      next: () => alert('Professeur ajouté avec succès'),
+      next: () => {
+        this.isSubmitting = false;
+        alert('Professeur ajouté avec succès');
+        this.signupForm.reset();  // Réinitialiser le formulaire
+      },
       error: (error) => {
+        this.isSubmitting = false;
         console.error(error);
-        alert('Une erreur est survenue');
+        this.errorMessage = 'Une erreur est survenue lors de l\'ajout du professeur.';
       },
     });
+  }
+
+  // Fonction pour récupérer les erreurs de validation
+  get formControls() {
+    return this.signupForm.controls;
   }
 }

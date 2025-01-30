@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h2>Details du Professeur</h2>
+
+  <!-- Affichage des informations du professeur -->
+  <div class="mb-4">
+    <h3>{{ prof.user.firstname }} {{ prof.user.lastname }}</h3>
+    <p><strong>Email:</strong> {{ prof.user.email }}</p>
+    <p><strong>CIN:</strong> {{ prof.cin }}</p>
+  </div>
+
+  <h3>Modules Associés:</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nom du Module</th>
+        <th>Nombre d'Heures</th>
+        <th>Semestre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div *ngIf="isLoading">Chargement...</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<!-- Affichage des données quand elles sont chargées -->
+<div *ngIf="prof">
+  <p>{{ prof.user.firstname }} {{ prof.user.lastname }}</p>
+  <p>{{ prof.user.email }}</p>
+</div>
+
+    </tbody>
+  </table>
+</div>

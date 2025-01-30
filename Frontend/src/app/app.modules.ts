@@ -25,6 +25,7 @@ import { ProfListComponent } from './list-prof/list-prof.component';
 import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
 import { ListEtudComponent } from './list-etud/list-etud.component';
 import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
+import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
     AjoutProfComponent,
     ListEtudComponent,
     AjoutEtudComponent,
+    ModifierProfComponent
   ],
   imports: [
     BrowserModule,

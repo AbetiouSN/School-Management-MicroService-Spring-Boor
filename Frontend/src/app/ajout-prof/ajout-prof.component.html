@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <h2 class="text-center"> {{ prof.id ? 'Modifier Professeur' : 'Ajouter Professeur' }}</h2>
-    
+
     <form (ngSubmit)="ajouterProf()" class="form-professeur">
       <div class="form-group">
         <label for="nom">Nom</label>
@@ -9,7 +9,7 @@
           <input type="text" id="nom" class="form-control" [(ngModel)]="prof.user.firstname" name="nom" required placeholder="Entrez le nom">
         </div>
       </div>
-  
+
       <div class="form-group">
         <label for="prenom">Prénom</label>
         <div class="input-group">
@@ -17,7 +17,7 @@
           <input type="text" id="prenom" class="form-control" [(ngModel)]="prof.user.lastname" name="prenom" required placeholder="Entrez le prénom">
         </div>
       </div>
-  
+
       <div class="form-group">
         <label for="cin">CIN</label>
         <div class="input-group">
@@ -25,7 +25,7 @@
           <input type="text" id="cin" class="form-control" [(ngModel)]="prof.cin" name="cin" required placeholder="Entrez le CIN">
         </div>
       </div>
-  
+
       <div class="form-group">
         <label for="email">Email</label>
         <div class="input-group">
@@ -33,13 +33,12 @@
           <input type="email" id="email" class="form-control" [(ngModel)]="prof.user.email" name="email" required placeholder="Entrez l'email">
         </div>
       </div>
-  
-      <button 
-  type="submit" 
+
+      <button
+  type="submit"
   class="btn btn-primary mt-3">
   {{ prof.id ? 'Modifier Professeur' : 'Ajouter Professeur' }}
 </button>
 
     </form>
   </div>
-  

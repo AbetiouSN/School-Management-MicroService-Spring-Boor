@@ -1,5 +1,6 @@
 package com.abetiou.moduleservice.Services;
 
+import com.abetiou.moduleservice.DTO.ModuleWithStudentCount;
 import com.abetiou.moduleservice.DTO.StudentDto;
 import com.abetiou.moduleservice.Entities.CourseModule;
 import com.abetiou.moduleservice.Repository.ModuleRepository;
@@ -109,5 +110,20 @@ public class ModuleService {
     public List<CourseModule> getModulesByProfId(Long profId) {
         return moduleRepository.findByProfId(profId);
     }
+
+    public List<ModuleWithStudentCount> getModulesWithStudentCount() {
+        // Ensure `findAll()` is called on the instance
+        return moduleRepository.findAll().stream()
+                .map(module -> new ModuleWithStudentCount(
+                        module.getId(),
+                        module.getModuleName(),
+                        module.getNombreHeures(),
+                        module.getSemestre(),
+                        module.getProfId(),
+                        module.getStudentIds().size()
+                ))
+                .collect(Collectors.toList());
+    }
+
 
 }

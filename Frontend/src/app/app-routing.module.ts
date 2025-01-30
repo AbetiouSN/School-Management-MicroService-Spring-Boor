@@ -15,6 +15,8 @@ import { ProfListComponent } from './list-prof/list-prof.component';
 import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
 import { ListEtudComponent } from './list-etud/list-etud.component';
 import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
+import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
+import { DetailsProfComponent } from './prof-detail/prof-detail.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -26,6 +28,10 @@ const routes: Routes = [
     { path: 'listEtud', component: ListEtudComponent },
     { path: 'ajoutEtud', component: AjoutEtudComponent },
   ]},
+
+  { path: 'admin/detailsProf/:id', component: DetailsProfComponent },
+
+
 
   {path:'etudiant',component:NavbarEtudiantComponent,canActivate: [EtudiantGuard],children:[
     { path: 'resetPassword', component: ResetPasswordComponent },

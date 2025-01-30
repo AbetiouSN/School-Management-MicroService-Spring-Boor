@@ -36,6 +36,11 @@ public interface AuthenticationServiceClient {
             @RequestParam("email") String email
     );
 
+    @DeleteMapping("/{id}")
+    void deleteUser(
+            @PathVariable("id") Long id
+    );
+
 
 }
 

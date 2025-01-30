@@ -17,7 +17,7 @@ export class AjoutProfComponent implements OnInit{
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params["id"];
-    
+
     // Si l'id n'est pas 0, on récupère les informations du professeur à modifier
     if (this.id !== 0) {
       this.profservice.ProfById(this.id).subscribe(
@@ -32,20 +32,30 @@ export class AjoutProfComponent implements OnInit{
   }
 
   ajouterProf(): void {
-    if (this.id === 0) {
-      // Ajouter un nouveau professeur
-      this.profservice.createProf(this.prof).subscribe(
-        (response: any) => {
-          this.router.navigate(['/admin/listProf']);
-        },
-        (error: any) => {
-          console.error('Error registering Prof', error);
-        }
-      );
-    } else {
-      this.modifierProf(this.id, this.prof);
-    }
+    // Ajouter un nouveau professeur sans vérifier l'id (ajout pur)
+    const newProf: Prof = {
+      cin: this.prof.cin,
+      user: {
+        firstname: this.prof.user.firstname,
+        lastname: this.prof.user.lastname,
+        email: this.prof.user.email
+      }
+    };
+
+    // Appel pour créer un professeur (ajout uniquement)
+    this.profservice.createProf(newProf).subscribe(
+      (response: any) => {
+        console.log('Professeur ajouté avec succès', response);
+        this.router.navigate(['/admin/listProf']);  // Rediriger vers la liste des professeurs après ajout
+      },
+      (error: any) => {
+        console.error('Erreur lors de l\'ajout du professeur', error);
+      }
+    );
   }
+
+
+
 
   modifierProf(id: number, prof: Prof): void {
     // Modifier un professeur existant

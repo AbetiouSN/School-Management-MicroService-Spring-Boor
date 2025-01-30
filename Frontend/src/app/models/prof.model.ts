@@ -1,7 +1,18 @@
-import { user } from './user.model';
-
 export class Prof {
-  id: number =0;
-  cin:string='';
-  user: user = new user(); 
+  id?: number;
+  cin: string = '';
+  userId?: number;
+  user: {
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
+
+  constructor() {
+    this.user = {
+      firstname: '',
+      lastname: '',
+      email: ''
+    };
+  }
 }

@@ -43,26 +43,40 @@ public class ProfController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Prof> updateStudent(
+    public ResponseEntity<Prof> updateProf(
             @PathVariable Long id,
             @RequestBody ProfUpdateRequest request
     ) {
-        Prof updatedProf = profService.updateStudentById(id, request.getProf(), request.getRegisterRequest());
+        Prof updatedProf = profService.updateprofById(id, request.getProf(), request.getRegisterRequest());
         return ResponseEntity.ok(updatedProf);
     }
 
 
 
-    // Endpoint pour récupérer la liste de tous les professeurs
-    @GetMapping("/list")
-    public List<Prof> getAllProfs() {
-        return profService.getAllProfs();
-    }
+//    // Endpoint pour récupérer la liste de tous les professeurs
+//    @GetMapping("/list")
+//    public List<Prof> getAllProfs() {
+//        return profService.getAllProfs();
+//    }
 
+
+    @GetMapping("/list")
+    public ResponseEntity<List<ProfUpdateRequest>> getAllProfUpdateRequests() {
+        List<ProfUpdateRequest> profUpdateRequests = profService.getAllProfUpdateRequests();
+        return ResponseEntity.ok(profUpdateRequests);
+    }
 
     //prof by id
     @GetMapping("/{id}")
     public ProfUpdateRequest getProfById(@PathVariable Long id) {
         return profService.findProfById(id);
     }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletProf(@PathVariable Long id){
+        profService.deleteProf(id);
+        return ResponseEntity.ok("prof deleted successfully");
+    }
+
 }

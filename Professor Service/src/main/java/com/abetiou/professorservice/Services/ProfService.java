@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfService {
@@ -46,7 +47,7 @@ public class ProfService {
         }
     }
 
-    public Prof updateStudentById(Long id, Prof student, User user) {
+    public Prof updateprofById(Long id, Prof student, User user) {
         // Récupération de l'ancien prof
         Optional<Prof> existingProfOptional = profRepository.findById(id);
 
@@ -90,6 +91,20 @@ public class ProfService {
         return profRepository.findAll();
     }
 
+    public List<ProfUpdateRequest> getAllProfUpdateRequests() {
+        // Récupérer la liste des professeurs
+        List<Prof> profs = profRepository.findAll();
+
+        // Mapper chaque professeur en ProfUpdateRequest
+        return profs.stream()
+                .map(prof -> {
+                    User user = authenticationServiceClient.findUserById(prof.getUserId());
+                    return new ProfUpdateRequest(prof, user);
+                })
+                .collect(Collectors.toList());
+    }
+
+
 
     public ProfUpdateRequest findProfById(Long id) {
         // Récupération de l'ancien prof
@@ -99,6 +114,20 @@ public class ProfService {
             return new ProfUpdateRequest(prof.get(), user);
         }
         return null;
+    }
+
+
+
+    //delete User by id
+    public void deleteProf(Long id){
+        Prof student = profRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (student != null){
+            profRepository.delete(student);
+            authenticationServiceClient.deleteUser(student.getUserId());
+
+            System.out.println("User deleted successfully");
+        }
     }
 
 
