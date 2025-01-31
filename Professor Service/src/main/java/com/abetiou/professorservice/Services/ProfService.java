@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.file.AccessDeniedException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -128,6 +129,29 @@ public class ProfService {
 
             System.out.println("User deleted successfully");
         }
+    }
+
+
+    //retirer un module a partir d'un prof
+
+    public boolean removeModuleFromProf(Long profId, Long moduleId) {
+        Optional<Prof> optionalProf = profRepository.findById(profId);
+
+        if (optionalProf.isPresent()) {
+            Prof prof = optionalProf.get();
+            System.out.println("Existing modules: " + prof.getModuleIds());
+
+            if (prof.getModuleIds().contains(moduleId)) {
+                prof.getModuleIds().removeIf(id -> Objects.equals(id, moduleId));
+                profRepository.save(prof);
+                return true;
+            } else {
+                System.out.println("Module ID not found in the professor's list.");
+            }
+        } else {
+            System.out.println("Professor not found.");
+        }
+        return false;
     }
 
 

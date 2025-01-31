@@ -22,7 +22,7 @@ export class ProfListComponent implements OnInit {
       },
       error => console.log(error)
     );
-  }
+  } 
 
   ajouterProf() {
     this.router.navigate(['/admin/ajoutProf']);

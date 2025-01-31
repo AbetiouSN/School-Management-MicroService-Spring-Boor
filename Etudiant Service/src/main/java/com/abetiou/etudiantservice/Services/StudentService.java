@@ -75,8 +75,17 @@ public class StudentService {
 
 
 
-    public List<Student> getStudentByNiveau(String niveau) {
-        return studentRepository.findStudentByNiveau(niveau);
+    public List<UpdateStudentRequest> getStudentByNiveau(String niveau) {
+//        return studentRepository.findStudentByNiveau(niveau);
+        List<Student> students = studentRepository.findStudentByNiveau(niveau);
+        List<UpdateStudentRequest> updateStudentRequests = new ArrayList<>();
+
+        for (Student student : students) {
+            User user = authenticationServiceClient.findUserById(student.getUserId());
+            updateStudentRequests.add(new UpdateStudentRequest(student, user));
+        }
+
+        return updateStudentRequests;
     }
 
 
@@ -173,9 +182,25 @@ public class StudentService {
     }
 
 
-    public List<Student> getStudentsByModuleId(Long moduleId) {
-        return studentRepository.findByModuleId(moduleId);
+//    public List<Student> getStudentsByModuleId(Long moduleId) {
+//
+//        return studentRepository.findByModuleId(moduleId);
+//    }
+
+    public List<UpdateStudentRequest> getStudentsByModuleId(Long moduleId) {
+        // Récupération des étudiants par moduleId
+        List<Student> students = studentRepository.findByModuleId(moduleId);
+        List<UpdateStudentRequest> updateStudentRequests = new ArrayList<>();
+
+        for (Student student : students) {
+            // Récupérer les informations utilisateur associées via le service d'authentification
+            User user = authenticationServiceClient.findUserById(student.getUserId());
+            updateStudentRequests.add(new UpdateStudentRequest(student, user));
+        }
+
+        return updateStudentRequests;
     }
+
 
 
     // separer etud 3la module

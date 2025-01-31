@@ -72,11 +72,16 @@ public class ProfController {
         return profService.findProfById(id);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletProf(@PathVariable Long id){
         profService.deleteProf(id);
-        return ResponseEntity.ok("prof deleted successfully");
+        return ResponseEntity.ok("pr  of deleted successfully");
+    }
+
+    @DeleteMapping("/{profId}/modules/{moduleId}")
+    public String removeModule(@PathVariable Long profId, @PathVariable Long moduleId) {
+        boolean removed = profService.removeModuleFromProf(profId, moduleId);
+        return removed ? "Module removed successfully" : "Module not found for this professor";
     }
 
 }

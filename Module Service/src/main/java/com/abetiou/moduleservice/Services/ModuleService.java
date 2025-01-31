@@ -1,6 +1,9 @@
 package com.abetiou.moduleservice.Services;
 
+import com.abetiou.moduleservice.Configurations.ProfessorServiceClient;
 import com.abetiou.moduleservice.DTO.ModuleWithStudentCount;
+import com.abetiou.moduleservice.DTO.ProfModulesResponse;
+import com.abetiou.moduleservice.DTO.ProfUpdateRequest;
 import com.abetiou.moduleservice.DTO.StudentDto;
 import com.abetiou.moduleservice.Entities.CourseModule;
 import com.abetiou.moduleservice.Repository.ModuleRepository;
@@ -20,11 +23,12 @@ public class ModuleService {
 
     private final ModuleRepository moduleRepository;
     private final RestTemplate restTemplate;
+    private final ProfessorServiceClient professorServiceClient;
 
-
-    public ModuleService(ModuleRepository moduleRepository,RestTemplate restTemplate) {
+    public ModuleService(ModuleRepository moduleRepository,RestTemplate restTemplate,ProfessorServiceClient professorServiceClient) {
         this.moduleRepository = moduleRepository;
         this.restTemplate = restTemplate;
+        this.professorServiceClient = professorServiceClient;
     }
 
     // Méthode pour créer un module et l'affecter à un professeur
@@ -125,5 +129,23 @@ public class ModuleService {
                 .collect(Collectors.toList());
     }
 
+
+    public ProfModulesResponse getModulesAndProfDetails(Long profId) {
+        // Récupérer les modules du professeur
+        List<CourseModule> modules = moduleRepository.findByProfId(profId);
+
+        // Récupérer les détails du professeur
+        ProfUpdateRequest profDetails = professorServiceClient.getProfById(profId);
+
+        return new ProfModulesResponse(modules, profDetails);
+    }
+
+
+
+    public void deleteModuleByProf(Long moduleId, Long profId) {
+        CourseModule courseModule = moduleRepository.findByIdAndProfId(moduleId, profId)
+                .orElseThrow(() -> new RuntimeException("Module not found for the given professor."));
+        moduleRepository.delete(courseModule);
+    }
 
 }

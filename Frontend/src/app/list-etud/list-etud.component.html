@@ -1,50 +1,100 @@
 <div class="container mt-4">
-    <h2 class="text-center">Liste des Etudiants</h2>
-  
-    <button routerLink="/admin/ajoutEtud" class="btn btn-primary mb-3" style="font-size: larger;" (click)="ajouterEtud()">Ajouter Etudiant</button>
-    
-    <!-- Barre de recherche -->
-   <div class="search-container mt-5">
-    <input 
-      type="text" 
-      class="form-control mb-3" 
-      placeholder="Rechercher par code Apogée" 
-      [(ngModel)]="searchTerm" 
-      (input)="filteredEtudiants()"
+  <h2 class="text-center">Liste des Étudiants</h2>
+
+  <button routerLink="/admin/ajoutEtud" class="btn btn-primary mb-3" (click)="ajouterEtud()">Ajouter Étudiant</button>
+  <!-- ======================= -->
+<div class="d-flex align-items-center mb-3">
+  <button class="btn btn-info" (click)="ouvrirPopupParNiveau()">Afficher Étudiants par Niveau</button>
+
+  <!-- Sélection du niveau -->
+  <div class="form-group mb-0 ml-3">
+    <label for="niveau" class="mr-2">Choisir un niveau</label>
+    <select id="niveau" class="custom-select" [(ngModel)]="selectedNiveau" required>
+      <option value="API11">API11</option>
+      <option value="API12">API12</option>
+      <option value="API21">API21</option>
+      <option value="API22">API22</option>
+      <option value="CI11">CI11</option>
+      <option value="CI12">CI12</option>
+      <option value="CI21">CI21</option>
+      <option value="CI22">CI22</option>
+      <option value="CI31">CI31</option>
+      <option value="CI32">CI32</option>
+    </select>
+  </div>
+</div>
+
+  <!-- Popup -->
+  <div *ngIf="showPopup" class="popup-overlay">
+    <div class="popup-content">
+      <h3 class="text-center">Étudiants par Niveau : {{ selectedNiveau }}</h3>
+      <button class="btn btn-secondary mb-2" (click)="fermerPopup()">Fermer</button>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>CIN</th>
+            <th>Code Apogée</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let etud of filteredStudentsByNiveau">
+            <td>{{ etud.student.cin }}</td>
+            <td>{{ etud.student.codeAppogie }}</td>
+            <td>{{ etud.user.firstname }}</td>
+            <td>{{ etud.user.lastname }}</td>
+            <td>{{ etud.user.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======================= -->
+
+  <!-- Barre de recherche -->
+  <div class="search-container mt-3">
+    <input
+      type="text"
+      class="form-control mb-3"
+      placeholder="Rechercher par code Apogée"
+      [(ngModel)]="searchTerm"
     >
   </div>
-  
-    
-  
-    <table class="table table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th>CNE</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Date de Naissance</th>
-          <th>Date Inscription</th>
-          <th style="text-align: center;">Email</th>
-          <th style="text-align: center;">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let etud of filteredEtudiants()">
-          <td>{{ etud.codeAppogie }}</td>
-          <td>{{ etud.user.firstname }}</td>
-          <td>{{ etud.user.lastname }}</td>
-          <td>{{ etud.dateNaissance }}</td>
-          <td>{{ etud.dateInscription }}</td>
-          <td>{{ etud.user.email }}</td>
-          <td>
-            <div>
-              <button class="btn btn-warning btn-sm" (click)="modifierEtud(etud.codeAppogie)">Modifier</button>
-              <button class="btn btn-danger btn-sm" (click)="supprimerEtud(etud.id)">Supprimer</button>
-              
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
   </div>
-  
+
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>CIN</th>
+        <th>Code Apogée</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Niveau</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let etud of filteredEtudiants()">
+        <td>{{ etud.student.cin }}</td>
+        <td>{{ etud.student.codeAppogie }}</td>
+        <td>{{ etud.user.firstname }}</td>
+        <td>{{ etud.user.lastname }}</td>
+        <td>{{ etud.student.niveau }}</td>
+        <td>{{ etud.user.email }}</td>
+        <td>
+          <div>
+            <button class="btn btn-warning btn-sm" (click)="modifierEtud(etud.student.codeAppogie)">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="supprimerEtud(etud.student.id)">Supprimer</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

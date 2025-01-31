@@ -5,6 +5,8 @@ import { Prof } from '../models/prof.model';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
 import { ProfUpdateRequest } from '../models/prof-update-request.model';
+import { ProfResponse } from '../models/prof-response.model';
+import { ProfModulesResponse } from '../models/prof-modules-response.model';
 
 
 interface ProfApiResponse {
@@ -25,6 +27,8 @@ interface ProfApiResponse {
 })
 export class ProfService {
   private apiUrl = 'http://localhost:8083/professor';
+  private baseUrl = 'http://localhost:8084/modules'; // API du backend
+
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -46,6 +50,11 @@ export class ProfService {
     return this.http.post(`${this.apiUrl}/create`, requestBody, { headers });
   }
 
+  getProfById1(id: number): Observable<ProfResponse> {
+
+    return this.http.get<ProfResponse>(`${this.apiUrl}/${id}`);
+
+  }
 
   // deleteProf(id: number): Observable<any> {
   //   return this.http.delete(`${this.apiUrl}/${id}`);
@@ -132,5 +141,10 @@ updateProf(profId: number, updatedProf: any) {
   //  updateProf(id: number, updatedProf: Prof): Observable<Prof> {
   //   return this.http.put<Prof>(`${this.apiUrl}/${id}`, updatedProf);
   // }
+
+
+  getProfAndModules(profId: number): Observable<ProfModulesResponse> {
+    return this.http.get<ProfModulesResponse>(`${this.baseUrl}/prof/${profId}`);
+  }
 
 }

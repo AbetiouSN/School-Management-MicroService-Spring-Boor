@@ -9,15 +9,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
-
 import { NavbarEtudiantComponent } from './navbar-etudiant/navbar-etudiant.component';
-
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SignupProfComponent } from './signup-prof/signup-prof.component';
 import { CommonModule } from '@angular/common';
@@ -26,6 +21,8 @@ import { AjoutProfComponent } from './ajout-prof/ajout-prof.component';
 import { ListEtudComponent } from './list-etud/list-etud.component';
 import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
 import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
+import { DetailsProfComponent } from './prof-detail/prof-detail.component';
+import { ModuleListComponent } from './module-list/module-list.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +38,9 @@ import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
     AjoutProfComponent,
     ListEtudComponent,
     AjoutEtudComponent,
-    ModifierProfComponent
+    ModifierProfComponent,
+    DetailsProfComponent,
+    ModuleListComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +52,7 @@ import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
     NgbCollapseModule,
     ReactiveFormsModule,
     CommonModule,
+    CommonModule
 
 
   ],

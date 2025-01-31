@@ -17,27 +17,30 @@ import { ListEtudComponent } from './list-etud/list-etud.component';
 import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
 import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
 import { DetailsProfComponent } from './prof-detail/prof-detail.component';
+import { ModuleListComponent } from './module-list/module-list.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
 
-  { path: 'admin', component: NavbarAdminComponent,canActivate:[AdminGuard], children:[
+  { path: 'admin', component: NavbarAdminComponent, children:[
     { path: 'signup', component: SignupProfComponent },
     { path: 'listProf', component: ProfListComponent },
     { path: 'ajoutProf', component: AjoutProfComponent },
     { path: 'listEtud', component: ListEtudComponent },
     { path: 'ajoutEtud', component: AjoutEtudComponent },
+    { path: 'detailsProf/:id', component: DetailsProfComponent },
+    { path: 'modules', component: ModuleListComponent}
   ]},
 
-  { path: 'admin/detailsProf/:id', component: DetailsProfComponent },
 
 
 
-  {path:'etudiant',component:NavbarEtudiantComponent,canActivate: [EtudiantGuard],children:[
+
+  {path:'etudiant',component:NavbarEtudiantComponent,children:[
     { path: 'resetPassword', component: ResetPasswordComponent },
   ]},
 
-  { path: 'prof', component: NavbarComponent,canActivate: [ProfGuard], children: [
+  { path: 'prof', component: NavbarComponent, children: [
 
   ]}
 ];

@@ -5,4 +5,6 @@ export class CourseModule {
   semestre!: string;  // Semestre du module
   profId!: number;  // ID du professeur
   studentIds!: number[];  // Liste des IDs des étudiants affectés à ce module
+  selectedNiveau: string=''; // Ajout de la propriété selectedNiveau
+
 }

@@ -16,6 +16,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/students")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class StudentController {
 
     private final StudentService studentService;
@@ -29,6 +31,7 @@ public class StudentController {
             @RequestBody StudentCreationRequest request,
             @RequestHeader("Authorization") String token
     ) {
+        System.out.println("Creating student with request: " + request);
         try {
             // Appeler le service pour créer le professeur
             Student createdStudent = studentService.createStudent(request.getStudent(), request.getRegisterRequest(), token);
@@ -110,9 +113,21 @@ public class StudentController {
 
     //trouver liste des etudiants par module
     @GetMapping("/by-module/{moduleId}")
-    public List<Student> getStudentsByModule(@PathVariable Long moduleId) {
+//    public List<Student> getStudentsByModule(@PathVariable Long moduleId) {
+//        return studentService.getStudentsByModuleId(moduleId);
+//    }
+    public List<UpdateStudentRequest> getStudentsByModuleId(@PathVariable Long moduleId) {
         return studentService.getStudentsByModuleId(moduleId);
     }
+
+  //  @GetMapping("/students/cin/{cin}")
+//    public ResponseEntity<UpdateStudentRequest> findStudentByCin(@PathVariable String cin) {
+//        UpdateStudentRequest student = studentService.findStudentByCin(cin);
+//        if (student != null) {
+//            return ResponseEntity.ok(student);
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
 
 
     @DeleteMapping("/{studentId}/modules/{moduleId}")

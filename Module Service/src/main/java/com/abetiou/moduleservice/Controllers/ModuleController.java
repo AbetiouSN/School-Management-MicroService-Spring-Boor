@@ -1,6 +1,7 @@
 package com.abetiou.moduleservice.Controllers;
 
 import com.abetiou.moduleservice.DTO.ModuleWithStudentCount;
+import com.abetiou.moduleservice.DTO.ProfModulesResponse;
 import com.abetiou.moduleservice.Entities.CourseModule;
 import com.abetiou.moduleservice.Services.ModuleService;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/modules")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ModuleController {
 
     private final ModuleService moduleService;
@@ -52,14 +54,29 @@ public class ModuleController {
         return ResponseEntity.ok(courseModules);
     }
 
+//    @GetMapping("/prof/{profId}")
+//    public List<CourseModule> getModulesByProfId(@PathVariable Long profId) {
+//        return moduleService.getModulesByProfId(profId);
+//    }
+
     @GetMapping("/prof/{profId}")
-    public List<CourseModule> getModulesByProfId(@PathVariable Long profId) {
-        return moduleService.getModulesByProfId(profId);
+    public ProfModulesResponse getModulesAndProfDetails(@PathVariable Long profId) {
+        return moduleService.getModulesAndProfDetails(profId);
     }
 
     @GetMapping("/with-student-count")
     public List<ModuleWithStudentCount> getModulesWithStudentCount() {
         return moduleService.getModulesWithStudentCount();
+    }
+
+
+
+    //delete prof from module
+
+    @DeleteMapping("/delete")
+    public String deleteModuleByProf(@RequestParam Long moduleId, @RequestParam Long profId) {
+        moduleService.deleteModuleByProf(moduleId, profId);
+        return "Module successfully deleted.";
     }
 
 }
