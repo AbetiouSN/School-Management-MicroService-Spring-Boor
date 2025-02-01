@@ -18,6 +18,8 @@ import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
 import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
 import { DetailsProfComponent } from './prof-detail/prof-detail.component';
 import { ModuleListComponent } from './module-list/module-list.component';
+import { EtudiantInterfaceComponent } from './etudiant-interface/etudiant-interface.component';
+import { ProfInterfaceComponent } from './prof-interface/prof-interface.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -38,9 +40,11 @@ const routes: Routes = [
 
   {path:'etudiant',component:NavbarEtudiantComponent,children:[
     { path: 'resetPassword', component: ResetPasswordComponent },
+    { path: 'profile',component: EtudiantInterfaceComponent},
   ]},
 
   { path: 'prof', component: NavbarComponent, children: [
+    {path: 'profile', component: ProfInterfaceComponent}
 
   ]}
 ];

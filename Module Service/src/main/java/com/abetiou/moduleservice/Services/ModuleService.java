@@ -148,4 +148,9 @@ public class ModuleService {
         moduleRepository.delete(courseModule);
     }
 
+
+    public List<CourseModule> getModulesBySemestre(String semestre) {
+        return moduleRepository.findBySemestre(semestre);
+    }
+
 }

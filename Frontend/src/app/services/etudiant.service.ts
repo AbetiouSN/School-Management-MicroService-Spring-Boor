@@ -121,4 +121,22 @@ export class EtudiantService {
   getStudentsByModule(moduleId: number): Observable<Etud[]> {
     return this.http.get<Etud[]>(`${this.apiUrl}/by-module/${moduleId}`);
   }
+
+  getStudentByToken(): Observable<any> {
+    const token = this.authService.getToken();
+    if (!token) {
+      console.error("Aucun token trouvé dans le localStorage.");
+      return throwError('Token non disponible');
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/by-token`, { headers });
+  }
+
+
+  getModulesByNiveau(niveau: string): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8084/modules/by-niveau?niveau=${niveau}`);
+  }
+
+
 }

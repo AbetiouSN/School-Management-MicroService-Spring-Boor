@@ -197,7 +197,7 @@
 //     };
 //   }
 // }
-
+ 
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -296,5 +296,5 @@ export class DetailsProfComponent implements OnInit {
     }
   }
 
-  
+
 }

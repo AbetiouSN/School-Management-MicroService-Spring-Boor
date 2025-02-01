@@ -42,7 +42,7 @@ public class AuthenticationSercvice {
 
     public AuthenticationResponse registerWithoutPasswd(RegisterRequest request) {
         String generatedPassword = generateRandomPassword(12); // Vous pouvez ajuster la longueur si nécessaire
-
+        System.out.println("Generated password: " + generatedPassword);
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())

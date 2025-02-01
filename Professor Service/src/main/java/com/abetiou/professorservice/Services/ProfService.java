@@ -155,4 +155,22 @@ public class ProfService {
     }
 
 
+    public ProfUpdateRequest getStudentByToken(String token) {
+        // Fetch user by token from the authentication service
+        User user = authenticationServiceClient.getUserByToken(token);
+
+        if (user == null || user.getId() == null) {
+            throw new RuntimeException("User not found for the provided token.");
+        }
+
+        // Find student by userId
+        Prof student = profRepository.findByUserId(user.getId())
+                .orElseThrow(() -> new RuntimeException("Student not found for user ID: " + user.getId()));
+
+        // Return the DTO with student and user information
+        return new ProfUpdateRequest(student, user);
+    }
+
+
+
 }

@@ -17,4 +17,6 @@ public interface ModuleRepository extends JpaRepository<CourseModule,Long> {
 
     Optional<CourseModule> findByIdAndProfId(Long moduleId, Long profId);
 
+    List<CourseModule> findBySemestre(String semestre);
+
 }

@@ -23,6 +23,7 @@ import { AjoutEtudComponent } from './ajout-etud/ajout-etud.component';
 import { ModifierProfComponent } from './modifier-prof/modifier-prof.component';
 import { DetailsProfComponent } from './prof-detail/prof-detail.component';
 import { ModuleListComponent } from './module-list/module-list.component';
+import { EtudiantInterfaceComponent } from './etudiant-interface/etudiant-interface.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { ModuleListComponent } from './module-list/module-list.component';
     AjoutEtudComponent,
     ModifierProfComponent,
     DetailsProfComponent,
-    ModuleListComponent
+    ModuleListComponent,
   ],
   imports: [
     BrowserModule,

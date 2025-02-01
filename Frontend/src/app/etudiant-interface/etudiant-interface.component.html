@@ -1,0 +1,58 @@
+<div *ngIf="studentData" class=" container card p-4 shadow-sm mt-4">
+  <h2 class="text-primary mb-4 text-center">Informations de l'étudiant</h2>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <strong>Nom :</strong> <span class="fw-bold">{{ studentData.user.lastname }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <strong>Prénom :</strong> <span class="fw-bold">{{ studentData.user.firstname }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <strong>CIN :</strong> <span class="fw-bold">{{ studentData.student.cin }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <strong>Code Apogée :</strong> <span class="fw-bold">{{ studentData.student.codeAppogie }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <strong>Date de naissance :</strong> <span class="fw-bold">{{ studentData.student.dateNaissance | date:'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <strong>Date d'inscription :</strong> <span class="fw-bold">{{ studentData.student.dateInscription | date:'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <strong>Niveau :</strong> <span class="fw-bold">{{ studentData.student.niveau }}</span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <strong>Email :</strong>
+      <a href="mailto:{{ studentData.user.email }}" class="text-info">{{ studentData.user.email }}</a>
+    </div>
+  </div>
+
+  <!-- Button to modify information -->
+  <div class="text-center mt-4">
+    <button class="btn btn-warning">
+      Modifie vos informations
+    </button>
+  </div>
+</div>
+
+
+<!-- Liste des modules -->
+<div *ngIf="modules.length > 0" class=" container card p-4 shadow-sm mt-4">
+  <h2 class="text-success mb-4 text-center">Modules du semestre</h2>
+  <div *ngFor="let module of modules" class="list-group">
+    <div class="list-group-item list-group-item-action">
+      <div class="d-flex justify-content-between">
+        <div>
+          <strong>Nom du module :</strong> <span class="fw-bold">{{ module.moduleName }}</span>
+        </div>
+        <div class="text-muted">
+          <strong>Semestre :</strong> {{ module.semestre }}
+        </div>
+      </div>
+      <div class="mt-2">
+        <strong>Nombre d'heures :</strong> <span class="fw-bold">{{ module.nombreHeures }} heures</span>
+      </div>
+    </div>
+  </div>
+</div>

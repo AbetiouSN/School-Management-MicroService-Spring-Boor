@@ -1,0 +1,30 @@
+/* Add custom styles for a more modern look */
+.card {
+  border-radius: 10px;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+  font-size: 1.1rem;
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.badge-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.alert-info {
+  font-size: 1.2rem;
+}

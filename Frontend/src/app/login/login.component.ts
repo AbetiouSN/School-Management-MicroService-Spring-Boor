@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit {
           this.role = this.authService.currentUser()?.role;
           console.log(this.role);
           if (this.role == 'ADMIN') {
-            this.router.navigate(['admin/signup']);
+            this.router.navigate(['admin/listProf']);
           } else if (this.role == 'PROF') {
-            this.router.navigate(['/prof/tps/1']);
-          } else if (this.role == 'ETUD') {
+            this.router.navigate(['/prof/profile']);
+          } else if (this.role == 'STUDENT') {
             console.log(this.role);
-            this.router.navigate(['etudiant']);
+            this.router.navigate(['etudiant/profile']);
           }
         },
         error => {

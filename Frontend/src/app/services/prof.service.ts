@@ -147,4 +147,19 @@ updateProf(profId: number, updatedProf: any) {
     return this.http.get<ProfModulesResponse>(`${this.baseUrl}/prof/${profId}`);
   }
 
+
+  // In ProfService
+getAuthenticatedProf(): Observable<ProfUpdateRequest> {
+  const token = this.authService.getToken(); // Assume you have a method to retrieve the token
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return this.http.get<ProfUpdateRequest>(`${this.apiUrl}/by-token`, { headers });
+}
+
+// New method to get the professor's modules by their ID
+  getProfAndModules1(profId: number): Observable<ProfModulesResponse> {
+    return this.http.get<ProfModulesResponse>(`${this.baseUrl}/prof/${profId}`);
+  }
+
+
 }

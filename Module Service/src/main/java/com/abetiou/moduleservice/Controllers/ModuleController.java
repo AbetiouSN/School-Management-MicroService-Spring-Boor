@@ -79,4 +79,9 @@ public class ModuleController {
         return "Module successfully deleted.";
     }
 
+    @GetMapping("/by-niveau")
+    public List<CourseModule> getModulesBySemestre(@RequestParam String niveau) {
+        return moduleService.getModulesBySemestre(niveau);
+    }
+
 }

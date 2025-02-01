@@ -46,6 +46,15 @@ public class StudentController {
         }
     }
 
+
+    @GetMapping("/by-token")
+    public ResponseEntity<UpdateStudentRequest> getStudentByToken(@RequestHeader("Authorization") String token) {
+        UpdateStudentRequest response = studentService.getStudentByToken(token);
+        return ResponseEntity.ok(response);
+    }
+
+
+
     @GetMapping("/allStudentsWithNiveau/{niveau}")
     public ResponseEntity<?> getStudentByNiveau(@PathVariable String niveau) {
         return new ResponseEntity<>(studentService.getStudentByNiveau(niveau), HttpStatus.OK);

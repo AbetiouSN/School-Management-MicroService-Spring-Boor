@@ -21,6 +21,12 @@ public class ProfController {
         this.profService = profService;
     }
 
+    @GetMapping("/by-token")
+    public ResponseEntity<ProfUpdateRequest> getStudentByToken(@RequestHeader("Authorization") String token) {
+        ProfUpdateRequest response = profService.getStudentByToken(token);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createProfessor(
             @RequestBody ProfCreationRequest request,
@@ -83,5 +89,7 @@ public class ProfController {
         boolean removed = profService.removeModuleFromProf(profId, moduleId);
         return removed ? "Module removed successfully" : "Module not found for this professor";
     }
+
+
 
 }
